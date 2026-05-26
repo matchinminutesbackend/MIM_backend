@@ -261,8 +261,8 @@ class _IntroScreenState extends State<IntroScreen>
     final theme = Theme.of(context);
 
     // Responsive measurements adjusted to fit standard mobile screen heights
-    final cardHeight = (size.height * 0.40).clamp(320.0, 420.0);
-    final cardWidth = (size.width * 0.78).clamp(260.0, 300.0);
+    final cardHeight = (size.height * 0.36).clamp(240.0, 420.0);
+    final cardWidth = (size.width * 0.72).clamp(210.0, 300.0);
 
     return Scaffold(
       body: Stack(
@@ -345,40 +345,41 @@ class _IntroScreenState extends State<IntroScreen>
 
           // ── Layer 4: Primary Content (Logo, Stage, Buttons) ───────
           SafeArea(
-            child: AnimatedBuilder(
-              animation: _introProgress,
-              builder: (context, child) {
-                // Layout logic shifting elements depending on whether intro sequence has completed
-                // Layout logic shifting elements depending on whether intro sequence has completed
-                // Logo initial y: 25vh (0.25 * screenHeight), scale: 1.2
-                // Logo final y: 0.0, scale: 1.0
-                double logoY = (1.0 - _introProgress.value) * (size.height * 0.25);
-                double logoScale = 1.2 - (_introProgress.value * 0.2);
-                double otherOpacity = _introProgress.value;
-
-                return Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    // Logo + Brand Header
-                    Transform.translate(
-                      offset: Offset(0, logoY),
-                      child: Transform.scale(
-                        scale: logoScale,
-                        child: _buildLogoHeader(theme),
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: AnimatedBuilder(
+                animation: _introProgress,
+                builder: (context, child) {
+                  // Layout logic shifting elements depending on whether intro sequence has completed
+                  // Logo initial y: 20vh (0.20 * screenHeight), scale: 1.2
+                  // Logo final y: 0.0, scale: 1.0
+                  double logoY = (1.0 - _introProgress.value) * (size.height * 0.20);
+                  double logoScale = 1.2 - (_introProgress.value * 0.2);
+                  double otherOpacity = _introProgress.value;
+  
+                  return Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      // Logo + Brand Header
+                      Transform.translate(
+                        offset: Offset(0, logoY),
+                        child: Transform.scale(
+                          scale: logoScale,
+                          child: _buildLogoHeader(theme),
+                        ),
                       ),
-                    ),
-
-                    // Stage + CTAs (Only shown / faded in when introDone progresses)
-                    Expanded(
-                      child: IgnorePointer(
+  
+                      // Stage + CTAs (Only shown / faded in when introDone progresses)
+                      IgnorePointer(
                         ignoring: _introProgress.value == 0.0,
                         child: Opacity(
                           opacity: otherOpacity,
                           child: Transform.translate(
                             offset: Offset(0, (1.0 - otherOpacity) * 30),
                             child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                               // 3D Swipe Stage Container
                               SizedBox(
                                 height: cardHeight + 40,
@@ -643,17 +644,17 @@ class _IntroScreenState extends State<IntroScreen>
                                   ],
                                 ),
                               ),
-                            ],
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-              },
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
         ],
       ),
     );

@@ -45,6 +45,12 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
+        <!-- UCropActivity required by image_cropper -->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <!-- FileProvider required by image_cropper (uCrop) to share file URIs on Android 7+ -->
         <provider
             android:name="androidx.core.content.FileProvider"

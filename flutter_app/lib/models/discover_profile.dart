@@ -45,7 +45,7 @@ class DiscoverProfile {
       // DB uses 'id' as primary key
       userId: json['id'] as String? ?? json['user_id'] as String? ?? '',
       name: json['name'] as String? ?? 'Unknown',
-      age: json['age'] as int?,
+      age: json['age'] != null ? (json['age'] as num).toInt() : null,
       city: json['city'] as String?,
       bio: json['bio'] as String?,
       // DB uses main_image_url

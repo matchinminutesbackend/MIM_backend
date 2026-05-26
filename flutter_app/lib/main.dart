@@ -15,14 +15,7 @@ Future<void> main() async {
   // Initialise Firebase + FCM listeners. Gracefully no-ops if
   // google-services.json is not yet placed in android/app/.
   await NotificationService.init();
-  final themeProvider = ThemeProvider();
-  await themeProvider.initialize();
-  runApp(
-    ChangeNotifierProvider.value(
-      value: themeProvider,
-      child: const MatchInMinutesApp(),
-    ),
-  );
+  runApp(const MatchInMinutesApp());
 }
 
 class MatchInMinutesApp extends StatelessWidget {
@@ -30,16 +23,20 @@ class MatchInMinutesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => DiscoverProvider()),
         ChangeNotifierProvider(create: (_) => MessagesProvider()),
         ChangeNotifierProvider(create: (_) => CallService()),
+        ChangeNotifierProvider(create: (_) {
+          final tp = ThemeProvider();
+          tp.initialize();
+          return tp;
+        }),
       ],
-      child: MaterialApp(
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, _) => MaterialApp(
         title: 'MatchInMinutes',
         navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
@@ -111,7 +108,8 @@ class MatchInMinutesApp extends StatelessWidget {
             ),
           ),
         ),
-        home: const IntroScreen(),
+          home: const IntroScreen(),
+        ),
       ),
     );
   }

@@ -186,7 +186,20 @@ class ApiService {
       Uri.parse('${ApiConfig.baseUrl}/images/upload?is_main=$isMain'),
     );
     if (token != null) req.headers['Authorization'] = 'Bearer $token';
-    req.files.add(await http.MultipartFile.fromPath('file', file.path));
+    
+    final path = file.path.toLowerCase();
+    MediaType contentType = MediaType('image', 'jpeg');
+    if (path.endsWith('.png')) {
+      contentType = MediaType('image', 'png');
+    } else if (path.endsWith('.webp')) {
+      contentType = MediaType('image', 'webp');
+    }
+
+    req.files.add(await http.MultipartFile.fromPath(
+      'file',
+      file.path,
+      contentType: contentType,
+    ));
     final streamed = await req.send();
     final res = await http.Response.fromStream(streamed);
     return await _handle(res);
@@ -217,7 +230,20 @@ class ApiService {
       Uri.parse('${ApiConfig.baseUrl}/images/verification'),
     );
     if (token != null) req.headers['Authorization'] = 'Bearer $token';
-    req.files.add(await http.MultipartFile.fromPath('file', file.path));
+
+    final path = file.path.toLowerCase();
+    MediaType contentType = MediaType('image', 'jpeg');
+    if (path.endsWith('.png')) {
+      contentType = MediaType('image', 'png');
+    } else if (path.endsWith('.webp')) {
+      contentType = MediaType('image', 'webp');
+    }
+
+    req.files.add(await http.MultipartFile.fromPath(
+      'file',
+      file.path,
+      contentType: contentType,
+    ));
     final streamed = await req.send();
     final res = await http.Response.fromStream(streamed);
     return await _handle(res);

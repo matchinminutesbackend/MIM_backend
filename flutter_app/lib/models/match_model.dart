@@ -63,11 +63,11 @@ class MatchModel {
         partnerId: partner['id'] as String? ?? '',
         partnerName: partner['name'] as String? ?? 'Unknown',
         partnerPhotoUrl: partner['main_image_url'] as String?,
-        partnerAge: partner['age'] as int?,
+        partnerAge: partner['age'] != null ? (partner['age'] as num).toInt() : null,
         partnerCity: partner['city'] as String?,
         matchedAt:
             matchedAtStr != null ? DateTime.tryParse(matchedAtStr) : null,
-        unreadCount: json['unread_count'] as int? ?? 0,
+        unreadCount: json['unread_count'] != null ? (json['unread_count'] as num).toInt() : 0,
         lastMessage: lastMsg,
         lastMessageAt: lastMessageAt,
         removedAt: removedAtStr != null ? DateTime.tryParse(removedAtStr) : null,
@@ -80,7 +80,7 @@ class MatchModel {
         partnerId: profile['id'] as String? ?? '',
         partnerName: profile['name'] as String? ?? 'Unknown',
         partnerPhotoUrl: profile['main_image_url'] as String?,
-        partnerAge: profile['age'] as int?,
+        partnerAge: profile['age'] != null ? (profile['age'] as num).toInt() : null,
         partnerCity: profile['city'] as String?,
         likeStatus: json['status'] as String? ?? 'pending',
       );
@@ -92,7 +92,7 @@ class MatchModel {
             json['id'] as String? ?? json['partner_id'] as String? ?? '',
         partnerName: json['name'] as String? ?? 'Unknown',
         partnerPhotoUrl: json['main_image_url'] as String?,
-        partnerAge: json['age'] as int?,
+        partnerAge: json['age'] != null ? (json['age'] as num).toInt() : null,
         partnerCity: json['city'] as String?,
       );
     }

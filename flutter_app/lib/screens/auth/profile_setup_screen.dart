@@ -545,27 +545,6 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
     try {
       final xfile = await _picker.pickImage(source: ImageSource.camera, imageQuality: 85);
       if (xfile == null || !mounted) return;
-      final ext = xfile.path.split('.').last.toLowerCase();
-      if (!_allowedExts.contains(ext)) {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            backgroundColor: const Color(0xFF1E1E2E),
-            title: const Text('Invalid file type', style: TextStyle(color: Colors.white)),
-            content: const Text(
-              'Only JPEG, PNG, and WebP images are allowed.',
-              style: TextStyle(color: Colors.white70),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK', style: TextStyle(color: Color(0xFFFF4E8A))),
-              ),
-            ],
-          ),
-        );
-        return;
-      }
       setState(() => _selfie = File(xfile.path));
     } catch (_) {
       // Camera access denied or cancelled — nothing to do
@@ -813,9 +792,9 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
             // Soft background blur so the slanted scrolling cards are dreamlike and professional
             Positioned.fill(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                 child: Container(
-                  color: const Color(0xFF0D0D1A).withOpacity(0.25),
+                  color: const Color(0xFF0D0D1A).withOpacity(0.12),
                 ),
               ),
             ),
@@ -1009,15 +988,15 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
         GestureDetector(
           onTap: _pickDob,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
-              color: Colors.white10,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white12),
+              color: Colors.white.withOpacity(0.03),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withOpacity(0.06)),
             ),
             child: Row(
               children: [
-                const Icon(Icons.cake_outlined, color: Colors.white54, size: 20),
+                Icon(Icons.cake_outlined, color: Colors.white.withOpacity(0.35), size: 20),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -1025,12 +1004,12 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                         ? 'Date of birth'
                         : '${_dobFormatted()}  (${_ageFromDob(_dob!)} yrs, ${_zodiac(_dob!)})',
                     style: TextStyle(
-                      color: _dob == null ? Colors.white38 : Colors.white,
+                      color: _dob == null ? Colors.white.withOpacity(0.35) : Colors.white,
                       fontSize: 15,
                     ),
                   ),
                 ),
-                const Icon(Icons.chevron_right, color: Colors.white38),
+                Icon(Icons.chevron_right, color: Colors.white.withOpacity(0.35)),
               ],
             ),
           ),
@@ -1221,17 +1200,17 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
           // Caste — filtered by user's selected state
           if (_state == null)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.white12),
+                color: Colors.white.withOpacity(0.03),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withOpacity(0.06)),
               ),
-              child: const Row(children: [
-                Icon(Icons.info_outline, color: Colors.white38, size: 16),
-                SizedBox(width: 8),
+              child: Row(children: [
+                Icon(Icons.info_outline, color: Colors.white.withOpacity(0.35), size: 16),
+                const SizedBox(width: 12),
                 Text('Select your state above to see caste options',
-                    style: TextStyle(color: Colors.white38, fontSize: 13)),
+                    style: TextStyle(color: Colors.white.withOpacity(0.35), fontSize: 13)),
               ]),
             )
           else
@@ -1296,15 +1275,15 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
         GestureDetector(
           onTap: () => _showLanguagesSelect(context),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white12),
+              color: Colors.white.withOpacity(0.03),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withOpacity(0.06)),
             ),
             child: Row(
               children: [
-                const Icon(Icons.translate, color: Colors.white54, size: 20),
+                Icon(Icons.translate, color: Colors.white.withOpacity(0.35), size: 20),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -1312,14 +1291,14 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                         ? 'Languages spoken'
                         : _selectedLanguages.join(', '),
                     style: TextStyle(
-                      color: _selectedLanguages.isEmpty ? Colors.white38 : Colors.white,
+                      color: _selectedLanguages.isEmpty ? Colors.white.withOpacity(0.35) : Colors.white,
                       fontSize: 15,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const Icon(Icons.chevron_right, color: Colors.white38),
+                Icon(Icons.chevron_right, color: Colors.white.withOpacity(0.35)),
               ],
             ),
           ),
@@ -1668,7 +1647,7 @@ class _DarkGlowBg extends StatelessWidget {
           gradient: RadialGradient(
             center: Alignment(-0.3, -0.6),
             radius: 1.2,
-            colors: [Color(0x12FF4E8A), Color(0xFF0D0D1A)],
+            colors: [Color(0x06FF4E8A), Color(0xFF0D0D1A)],
           ),
         ),
       ),
@@ -1754,24 +1733,26 @@ class _Input extends StatelessWidget {
       keyboardType: keyboardType,
       maxLines: maxLines,
       inputFormatters: inputFormatters,
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white, fontSize: 15),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        labelStyle: const TextStyle(color: Colors.white54),
-        hintStyle: const TextStyle(color: Colors.white24),
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 14),
+        hintStyle: TextStyle(color: Colors.white.withOpacity(0.25), fontSize: 14),
         filled: true,
-        fillColor: Colors.white10,
+        fillColor: Colors.white.withOpacity(0.03),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        alignLabelWithHint: true,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.white12),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.06)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.white12),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.06)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: Color(0xFFFF4E8A), width: 1.5),
         ),
       ),
@@ -1797,23 +1778,23 @@ class _DropdownField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       decoration: BoxDecoration(
-        color: Colors.white10,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white12),
+        color: Colors.white.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withOpacity(0.06)),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: value,
           isExpanded: true,
-          dropdownColor: const Color(0xFF1E1E2E),
+          dropdownColor: const Color(0xFF131324),
           hint: Row(children: [
-            Icon(icon, color: Colors.white38, size: 18),
-            const SizedBox(width: 10),
-            Text(hint, style: const TextStyle(color: Colors.white38, fontSize: 15)),
+            Icon(icon, color: Colors.white.withOpacity(0.35), size: 18),
+            const SizedBox(width: 12),
+            Text(hint, style: TextStyle(color: Colors.white.withOpacity(0.35), fontSize: 15)),
           ]),
-          icon: const Icon(Icons.expand_more, color: Colors.white38),
+          icon: Icon(Icons.expand_more, color: Colors.white.withOpacity(0.35)),
           style: const TextStyle(color: Colors.white, fontSize: 15),
           items: items.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
           onChanged: onChanged,
@@ -2155,7 +2136,7 @@ class _SlantedScrollingBackground extends StatelessWidget {
     return Positioned.fill(
       child: ClipRect(
         child: Opacity(
-          opacity: 0.08,
+          opacity: 0.15,
           child: Transform.rotate(
             angle: -0.12,
             child: Transform.scale(

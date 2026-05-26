@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Gradient matches the brand's pink→rose used in BrandLogo / HeroSection -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="8" y1="56" x2="56" y2="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square so the mark reads on every OS (Apple / Android tile) -->
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+
+  <!-- Heart with arrow — same silhouette as BrandLogo's HeartNGlyph -->
+  <path d="M32 53
+           C32 53 11 38.5 11 25
+           C11 17.8 16.8 12 24 12
+           C27.5 12 30.4 14 32 16.7
+           C33.6 14 36.5 12 40 12
+           C47.2 12 53 17.8 53 25
+           C53 38.5 32 53 32 53 Z"
+        fill="#ffffff" fill-opacity="0.96"/>
+
+  <!-- Arrow shaft -->
+  <line x1="10" y1="50" x2="54" y2="10"
+        stroke="url(#arrow)" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- Arrowhead -->
+  <path d="M54 10 L45 12 L52 19 Z" fill="#ffffff"/>
+  <!-- Feathers -->
+  <path d="M10 50 L15 45 L13 52 Z" fill="#ffffff" fill-opacity="0.9"/>
+  <path d="M10 50 L17 48.5 L13.5 53 Z" fill="#ffffff" fill-opacity="0.75"/>
+</svg>

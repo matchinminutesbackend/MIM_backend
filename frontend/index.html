@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ── Favicons / app icons ────────────────────────────────────── -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/assets/icon.png" />
+    <!-- Apple home-screen icon -->
+    <link rel="apple-touch-icon" href="/assets/icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MatchInMinutes" />
+    <meta name="application-name" content="MatchInMinutes" />
+    <!-- Tint the Android Chrome toolbar to match the brand -->
+    <meta name="theme-color" content="#ec4899" />
+    <!-- Force light scheme only. "light dark" let Chrome auto-invert form
+         controls on users with dark-mode OS, making input boxes render
+         black on the otherwise-white signup/login forms. -->
+    <meta name="color-scheme" content="light only" />
+
+    <!-- ── Primary meta ─────────────────────────────────────────────── -->
+    <title>MatchInMinutes — Find Your Match in Minutes</title>
+    <meta
+      name="description"
+      content="MatchInMinutes is a modern dating app for singles looking for real connections. Verified profiles, smart matches, and meaningful conversations — start for free."
+    />
+    <meta
+      name="keywords"
+      content="dating app, online dating, find love, meet singles, verified profiles, matchmaking, relationships, dating india, dating site, match in minutes"
+    />
+    <meta name="author" content="MatchInMinutes" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="googlebot" content="index,follow" />
+    <link rel="canonical" href="https://matchinminutes.com/" />
+
+    <!-- ── Open Graph (Facebook / LinkedIn / Discord / iMessage) ───── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MatchInMinutes" />
+    <meta property="og:title" content="MatchInMinutes — Find Your Match in Minutes" />
+    <meta
+      property="og:description"
+      content="A modern dating app for singles looking for real connections. Verified profiles, smart matches, start for free."
+    />
+    <meta property="og:url" content="https://matchinminutes.com/" />
+    <meta property="og:image" content="https://matchinminutes.com/assets/icon.png" />
+    <meta property="og:image:alt" content="MatchInMinutes heart logo" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ── Twitter / X card ────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MatchInMinutes — Find Your Match in Minutes" />
+    <meta
+      name="twitter:description"
+      content="Dating app with verified profiles and smart matches. Start free."
+    />
+    <meta name="twitter:image" content="https://matchinminutes.com/assets/icon.png" />
+    <meta name="twitter:image:alt" content="MatchInMinutes heart logo" />
+
+    <!-- ── Structured data (Google rich result for SiteLinks search) ─ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MatchInMinutes",
+        "alternateName": "Match In Minutes",
+        "url": "https://matchinminutes.com/",
+        "description": "A modern dating app for singles looking for real connections.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://matchinminutes.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MatchInMinutes",
+        "url": "https://matchinminutes.com/",
+        "logo": "https://matchinminutes.com/assets/icon.png",
+        "sameAs": []
+      }
+    </script>
+
+    <!-- Razorpay Checkout — loaded globally so WalletView can open the
+         modal without a dynamic loader. Safe: the script is a no-op until
+         window.Razorpay({ ... }) is called. -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

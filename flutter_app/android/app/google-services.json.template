@@ -1,0 +1,47 @@
+{
+  "_comment": "SETUP INSTRUCTIONS — replace this file with your real google-services.json",
+  "_steps": [
+    "1. Go to https://console.firebase.google.com",
+    "2. Click 'Add project' → select your existing Google Cloud project (number: 610696728606)",
+    "3. In the Firebase project, click the Android icon (Add app)",
+    "4. Enter package name: com.example.match_in_minutes",
+    "5. Download google-services.json and place it HERE (android/app/google-services.json)",
+    "6. In android/build.gradle.kts  → uncomment the classpath line",
+    "7. In android/app/build.gradle.kts → uncomment the plugin line",
+    "8. For backend FCM: Firebase Console → Project Settings → Service Accounts → Generate new private key",
+    "9. Set env var: FIREBASE_SERVICE_ACCOUNT_JSON=/path/to/serviceAccountKey.json",
+    "10. Add column to profiles table: ALTER TABLE profiles ADD COLUMN IF NOT EXISTS fcm_token TEXT;"
+  ],
+  "project_info": {
+    "project_number": "610696728606",
+    "project_id": "REPLACE-WITH-FIREBASE-PROJECT-ID",
+    "storage_bucket": "REPLACE-WITH-FIREBASE-PROJECT-ID.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610696728606:android:REPLACE-WITH-APP-ID-FROM-FIREBASE",
+        "android_info": {
+          "package_name": "com.example.match_in_minutes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610696728606-hjv0463opi1e5umn1nas2e3589ss9dqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "REPLACE-WITH-ANDROID-API-KEY-FROM-FIREBASE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

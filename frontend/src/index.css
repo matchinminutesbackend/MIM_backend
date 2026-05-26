@@ -1,0 +1,655 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Phone marquee — GPU-composited, runs entirely off the main thread */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-left  { animation: marquee-left  linear infinite; will-change: transform; }
+.marquee-right { animation: marquee-right linear infinite; will-change: transform; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0b0b18;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* hide scrollbar while keeping scroll functionality */
+*::-webkit-scrollbar { display: none; }
+* { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Form control theming ───────────────────────────────────────────
+ * Chrome auto-inverts inputs when the user's OS is in dark mode,
+ * which turns our white signup/login form boxes black. We design the
+ * app as a light-themed UI everywhere (the form bg is white), so force
+ * the native controls to follow the same scheme. `color-scheme: light`
+ * also suppresses the dark autofill pill that Chrome paints yellow-on-
+ * black on saved credentials. */
+input, textarea, select, button {
+  color-scheme: light;
+}
+
+/* Keep Chrome's autofill state visually consistent — otherwise saved
+ * emails/passwords paint the field pale yellow, which clashes with the
+ * form's neutral grey. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: #111827; /* gray-900 */
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DARK MODE — global CSS overrides
+   ═══════════════════════════════════════════════════════════════════════
+   When the `.dark` class is present on <html>, these rules flip every
+   major surface, text, and border colour in the Dashboard. This approach
+   lets us theme the entire 6 500-line app without touching individual
+   JSX class strings — only the CSS layer changes.
+
+   Palette tokens:
+     --dk-bg-base    : #0d0d1a   (deepest canvas)
+     --dk-bg-surface : #16162a   (cards, sidebar)
+     --dk-bg-raised  : #1e1e38   (secondary cards, hover states)
+     --dk-bg-inset   : #252545   (inputs, dropdowns)
+     --dk-border     : #2a2a4a   (subtle borders)
+     --dk-border-bold: #3a3a5c   (pronounced borders)
+     --dk-text       : #e8e6f0   (primary text)
+     --dk-text-muted : #9896a8   (secondary text)
+     --dk-text-faint : #6b6988   (tertiary / labels)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Root-level color scheme ────────────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+}
+
+.dark input,
+.dark textarea,
+.dark select,
+.dark button {
+  color-scheme: dark;
+}
+
+/* ── Chrome autofill fix for dark mode ─────────────────────────────── */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill {
+  -webkit-text-fill-color: #e8e6f0 !important;
+  -webkit-box-shadow: 0 0 0 30px #1e1e38 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1. BACKGROUNDS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Main app canvas */
+.dark .bg-\[\#f8f5ff\] {
+  background-color: #0d0d1a !important;
+}
+
+/* White surfaces → dark card surface */
+.dark .bg-white {
+  background-color: #16162a !important;
+}
+
+/* Near-white surfaces */
+.dark .bg-gray-50 {
+  background-color: #1a1a30 !important;
+}
+.dark .bg-gray-100 {
+  background-color: #1e1e38 !important;
+}
+.dark .bg-gray-200 {
+  background-color: #252545 !important;
+}
+
+/* Accent tinted backgrounds */
+.dark .bg-rose-50,
+.dark .bg-pink-50 {
+  background-color: #1f1528 !important;
+}
+.dark .bg-rose-50\/60 {
+  background-color: rgba(31, 21, 40, 0.6) !important;
+}
+.dark .bg-rose-50\/70 {
+  background-color: rgba(31, 21, 40, 0.7) !important;
+}
+.dark .bg-rose-100 {
+  background-color: #2a1a35 !important;
+}
+.dark .bg-pink-50\/60 {
+  background-color: rgba(31, 21, 40, 0.6) !important;
+}
+.dark .bg-amber-50 {
+  background-color: #1f1a10 !important;
+}
+.dark .bg-blue-50 {
+  background-color: #101828 !important;
+}
+.dark .bg-red-50 {
+  background-color: #1f1015 !important;
+}
+.dark .bg-emerald-100,
+.dark .bg-green-50 {
+  background-color: #0f1f18 !important;
+}
+.dark .bg-purple-50 {
+  background-color: #1a1530 !important;
+}
+
+/* Semi-transparent white overlays → dark overlays */
+.dark .bg-white\/80 {
+  background-color: rgba(22, 22, 42, 0.85) !important;
+}
+.dark .bg-white\/95 {
+  background-color: rgba(22, 22, 42, 0.95) !important;
+}
+.dark .bg-white\/90 {
+  background-color: rgba(22, 22, 42, 0.92) !important;
+}
+.dark .bg-white\/60 {
+  background-color: rgba(22, 22, 42, 0.65) !important;
+}
+.dark .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.dark .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .bg-white\/15 {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+.dark .bg-white\/25 {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Gradient backgrounds used on the profile page */
+.dark .bg-gradient-to-br.from-rose-50 {
+  --tw-gradient-from: #1a1028 !important;
+}
+.dark .bg-gradient-to-br.via-pink-50\/60 {
+  --tw-gradient-via: rgba(26, 16, 40, 0.6) !important;
+}
+.dark .bg-gradient-to-br.to-rose-50 {
+  --tw-gradient-to: #1a1028 !important;
+}
+.dark .from-rose-50 {
+  --tw-gradient-from: #1a1028 !important;
+}
+.dark .to-pink-50 {
+  --tw-gradient-to: #1a1028 !important;
+}
+.dark .from-pink-100 {
+  --tw-gradient-from: #1f1530 !important;
+}
+.dark .to-purple-100 {
+  --tw-gradient-to: #1a1535 !important;
+}
+.dark .from-amber-50 {
+  --tw-gradient-from: #1f1a10 !important;
+}
+.dark .via-orange-50 {
+  --tw-gradient-via: #1f1810 !important;
+}
+.dark .to-amber-100 {
+  --tw-gradient-to: #261f10 !important;
+}
+
+/* ── Hover background overrides ───────────────────────────────────── */
+.dark .hover\:bg-gray-50:hover {
+  background-color: #1e1e38 !important;
+}
+.dark .hover\:bg-gray-100:hover {
+  background-color: #252545 !important;
+}
+.dark .hover\:bg-gray-200:hover {
+  background-color: #2a2a4a !important;
+}
+.dark .hover\:bg-white:hover {
+  background-color: #1e1e38 !important;
+}
+.dark .hover\:bg-rose-50:hover {
+  background-color: #251a30 !important;
+}
+.dark .hover\:bg-rose-50\/60:hover {
+  background-color: rgba(37, 26, 48, 0.6) !important;
+}
+.dark .hover\:bg-red-50:hover {
+  background-color: #251518 !important;
+}
+.dark .hover\:bg-red-100:hover {
+  background-color: #2a1a1e !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   2. TEXT COLORS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Primary text */
+.dark .text-gray-900 {
+  color: #e8e6f0 !important;
+}
+.dark .text-gray-800 {
+  color: #dddbe8 !important;
+}
+.dark .text-gray-700 {
+  color: #c4c2d0 !important;
+}
+
+/* Secondary/muted text */
+.dark .text-gray-600 {
+  color: #a8a6b8 !important;
+}
+.dark .text-gray-500 {
+  color: #9896a8 !important;
+}
+.dark .text-gray-400 {
+  color: #7a7890 !important;
+}
+.dark .text-gray-300 {
+  color: #6b6988 !important;
+}
+.dark .text-gray-200 {
+  color: #5a5878 !important;
+}
+
+/* Keep accent text colours vibrant but slightly adjusted for contrast */
+.dark .text-rose-600 {
+  color: #f472b6 !important;
+}
+.dark .text-rose-500 {
+  color: #fb7ebc !important;
+}
+.dark .text-pink-600 {
+  color: #f472b6 !important;
+}
+.dark .text-pink-500 {
+  color: #f47abe !important;
+}
+.dark .text-purple-600 {
+  color: #c084fc !important;
+}
+.dark .text-amber-700 {
+  color: #d4a050 !important;
+}
+.dark .text-amber-800\/80 {
+  color: rgba(200, 155, 70, 0.8) !important;
+}
+.dark .text-red-600 {
+  color: #f87171 !important;
+}
+
+/* Hover text */
+.dark .hover\:text-gray-800:hover {
+  color: #e0dee8 !important;
+}
+.dark .hover\:text-gray-700:hover {
+  color: #d0cee0 !important;
+}
+.dark .hover\:text-gray-600:hover {
+  color: #b0aec0 !important;
+}
+.dark .hover\:text-rose-600:hover {
+  color: #f472b6 !important;
+}
+.dark .hover\:text-rose-500:hover {
+  color: #f47abe !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   3. BORDERS
+   ═══════════════════════════════════════════════════════════════════════ */
+.dark .border-gray-50 {
+  border-color: #1e1e38 !important;
+}
+.dark .border-gray-100 {
+  border-color: #2a2a4a !important;
+}
+.dark .border-gray-200 {
+  border-color: #333358 !important;
+}
+.dark .border-gray-300 {
+  border-color: #3d3d60 !important;
+}
+.dark .border-rose-100 {
+  border-color: #3a2040 !important;
+}
+.dark .border-rose-100\/60 {
+  border-color: rgba(58, 32, 64, 0.6) !important;
+}
+.dark .border-rose-200 {
+  border-color: #4a2850 !important;
+}
+.dark .border-pink-100 {
+  border-color: #3a2040 !important;
+}
+.dark .border-pink-200 {
+  border-color: #4a2850 !important;
+}
+.dark .border-purple-100 {
+  border-color: #2a2050 !important;
+}
+.dark .border-amber-100 {
+  border-color: #3a3018 !important;
+}
+.dark .border-amber-200 {
+  border-color: #4a3a20 !important;
+}
+.dark .border-amber-300 {
+  border-color: #5a4828 !important;
+}
+.dark .border-blue-200 {
+  border-color: #1a2a4a !important;
+}
+.dark .border-red-200 {
+  border-color: #3a1a20 !important;
+}
+.dark .border-white {
+  border-color: #2a2a4a !important;
+}
+.dark .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .border-white\/15 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.dark .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Dashed border */
+.dark .border-dashed.border-rose-200 {
+  border-color: #4a2850 !important;
+}
+
+/* Focus ring overrides */
+.dark .focus\:ring-pink-400:focus,
+.dark .focus\:ring-pink-500:focus {
+  --tw-ring-color: rgba(236, 72, 153, 0.5) !important;
+}
+.dark .focus\:ring-rose-400:focus {
+  --tw-ring-color: rgba(251, 113, 133, 0.5) !important;
+}
+.dark .focus\:border-transparent:focus {
+  border-color: transparent !important;
+}
+.dark .focus\:border-rose-300:focus {
+  border-color: #6b3050 !important;
+}
+.dark .focus-within\:ring-rose-400:focus-within {
+  --tw-ring-color: rgba(251, 113, 133, 0.5) !important;
+}
+.dark .focus-within\:border-rose-300:focus-within {
+  border-color: #6b3050 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   4. FORM ELEMENTS (inputs, selects, textareas)
+   ═══════════════════════════════════════════════════════════════════════ */
+.dark input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.dark textarea,
+.dark select {
+  background-color: #1e1e38 !important;
+  color: #e8e6f0 !important;
+  border-color: #333358 !important;
+}
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #6b6988 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   5. SHADOWS — soften all box-shadows to near-invisible in dark mode
+   ═══════════════════════════════════════════════════════════════════════ */
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+.dark .shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4) !important;
+}
+.dark .shadow-lg {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45) !important;
+}
+.dark .shadow-xl {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5) !important;
+}
+.dark .shadow-2xl {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Coloured shadows → nearly invisible in dark */
+.dark .shadow-pink-100,
+.dark .shadow-pink-200,
+.dark .shadow-pink-300 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3) !important;
+}
+.dark .shadow-rose-100,
+.dark .shadow-rose-200 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   6. SPECIFIC COMPONENT OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Sidebar */
+.dark aside.bg-white {
+  background-color: #111125 !important;
+}
+.dark aside .border-gray-100 {
+  border-color: #2a2a4a !important;
+}
+
+/* Sidebar nav item icons — need to be brighter for readability on navy */
+.dark aside .text-gray-400 {
+  color: #8888a8 !important;
+}
+.dark aside .text-gray-600 {
+  color: #b0aec0 !important;
+}
+.dark aside .text-gray-500 {
+  color: #9898b0 !important;
+}
+
+/* Sidebar active item — softer highlight */
+.dark aside .bg-pink-50 {
+  background-color: rgba(236, 72, 153, 0.12) !important;
+}
+
+/* Sidebar bottom profile card — force dark surface on gradient cards */
+.dark aside .bg-gradient-to-br.from-pink-50,
+.dark aside .bg-gradient-to-br.from-rose-50,
+.dark aside .bg-gradient-to-br.from-amber-50 {
+  background: #1a1a30 !important;
+}
+.dark aside .border-pink-100,
+.dark aside .border-rose-100,
+.dark aside .border-rose-200,
+.dark aside .border-amber-300 {
+  border-color: #2a2a4a !important;
+}
+.dark aside .border-pink-400 {
+  border-color: #a855a8 !important;
+}
+
+/* Top header bar */
+.dark header.bg-white {
+  background-color: #111125 !important;
+}
+
+/* Profile view gradient background */
+.dark .min-h-full.bg-gradient-to-br {
+  background: linear-gradient(to bottom right, #0d0d1a, #12101e, #0d0d1a) !important;
+}
+
+/* Chat / Messages panel backgrounds */
+.dark .bg-\[\#faf7ff\] {
+  background-color: #0d0d1a !important;
+}
+.dark .bg-\[\#f0ebff\] {
+  background-color: #141428 !important;
+}
+
+/* Chip / tag backgrounds for dark mode */
+.dark .bg-rose-50.text-rose-700 {
+  background-color: #2a1530 !important;
+  color: #f9a8d4 !important;
+}
+.dark .bg-pink-50.text-pink-600 {
+  background-color: #2a1530 !important;
+  color: #f9a8d4 !important;
+}
+.dark .bg-purple-50.text-purple-600 {
+  background-color: #201535 !important;
+  color: #c4b5fd !important;
+}
+.dark .bg-gray-50.text-gray-700 {
+  background-color: #1e1e38 !important;
+  color: #c4c2d0 !important;
+}
+
+/* Toast */
+.dark .bg-gradient-to-r.from-pink-500.to-purple-500 {
+  background: linear-gradient(to right, #be185d, #7e22ce) !important;
+}
+
+/* Notification bell dropdown */
+.dark .bg-white.rounded-2xl,
+.dark .bg-white.rounded-3xl {
+  background-color: #16162a !important;
+}
+
+/* Active nav item in sidebar (global fallback — sidebar override above takes priority) */
+.dark .bg-pink-50 {
+  background-color: #251530 !important;
+}
+
+/* Modals / Overlays — dark surfaces */
+.dark .bg-black\/55 {
+  background-color: rgba(0, 0, 0, 0.65) !important;
+}
+.dark .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Status badges */
+.dark .bg-emerald-100.text-emerald-700 {
+  background-color: #0f2018 !important;
+  color: #6ee7b7 !important;
+}
+.dark .bg-red-100.text-red-700 {
+  background-color: #200f15 !important;
+  color: #fca5a5 !important;
+}
+.dark .bg-blue-100.text-blue-700 {
+  background-color: #0f1520 !important;
+  color: #93c5fd !important;
+}
+.dark .bg-amber-100.text-amber-700 {
+  background-color: #201a0f !important;
+  color: #fcd34d !important;
+}
+
+/* Ring overrides */
+.dark .ring-2.ring-white {
+  --tw-ring-color: #2a2a4a !important;
+}
+.dark .ring-white {
+  --tw-ring-color: #2a2a4a !important;
+}
+
+/* Gradient text overrides — improve contrast for gradient cards in dark mode */
+.dark .from-purple-50 {
+  --tw-gradient-from: #1a1530 !important;
+}
+.dark .to-purple-50 {
+  --tw-gradient-to: #1a1530 !important;
+}
+.dark .via-pink-50 {
+  --tw-gradient-via: #1f1528 !important;
+}
+.dark .to-amber-50 {
+  --tw-gradient-to: #1a1810 !important;
+}
+
+/* Violet/indigo gradient overrides (Instant Match banner, etc.) */
+.dark .from-violet-50 {
+  --tw-gradient-from: #15102a !important;
+}
+.dark .to-pink-50 {
+  --tw-gradient-to: #1f1528 !important;
+}
+.dark .border-violet-100 {
+  border-color: #2a2050 !important;
+}
+.dark .shadow-violet-200 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3) !important;
+}
+.dark .bg-violet-50 {
+  background-color: #15102a !important;
+}
+.dark .bg-indigo-50 {
+  background-color: #10102a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   7. DARK MODE TOGGLE SWITCH (custom component in ProfileView)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Animated toggle track */
+.dark-toggle-track {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  background: #d1d5db;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.dark-toggle-track.active {
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+}
+
+/* Toggle knob */
+.dark-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark-toggle-track.active .dark-toggle-knob {
+  transform: translateX(24px);
+}

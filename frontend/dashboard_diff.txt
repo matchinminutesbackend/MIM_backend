@@ -1,0 +1,2135 @@
+﻿git : warning: in the working copy of 
+'C:\Users\ajayk\Downloads\mheartm-main\mheartm-main\frontend\src\pages\Dashboard_old.jsx', LF will be replaced by CRLF 
+the next time Git touches it
+At line:1 char:1
++ git diff --no-index -U0 "C:\Users\ajayk\Downloads\mheartm-main\mheart ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: in the... Git touches it:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: in the working copy of 'C:\Users\ajayk\Downloads\mheartm-main\mheartm-main\frontend\src\pages\Dashboard.jsx', 
+LF will be replaced by CRLF the next time Git touches it
+diff --git "a/C:\\Users\\ajayk\\Downloads\\mheartm-main\\mheartm-main\\frontend\\src\\pages\\Dashboard_old.jsx" "b/C:\\Users\\ajayk\\Downloads\\mheartm-main\\mheartm-main\\frontend\\src\\pages\\Dashboard.jsx"
+index 21abb59..5741aca 100644
+--- "a/C:\\Users\\ajayk\\Downloads\\mheartm-main\\mheartm-main\\frontend\\src\\pages\\Dashboard_old.jsx"
++++ "b/C:\\Users\\ajayk\\Downloads\\mheartm-main\\mheartm-main\\frontend\\src\\pages\\Dashboard.jsx"
+@@ -4,0 +5 @@ import { useAuth } from "../context/AuthContext";
++import { useTheme } from "../context/ThemeContext";
+@@ -26 +27 @@ import {
+-  Phone, Video, Zap,
++  Phone, Video, Zap, Moon, Sun,
+@@ -41 +42 @@ function timeAgo(ts) {
+-  if (diff < 60_000)  return "now";
++  if (diff < 60_000) return "now";
+@@ -56,3 +57,2 @@ function Toast({ toast }) {
+-    <div className={`fixed top-5 right-5 z-50 flex items-center gap-2 px-5 py-3 rounded-2xl shadow-2xl text-white font-semibold text-sm transition-all ${
+-      toast.type === "error" ? "bg-red-500" : "bg-gradient-to-r from-pink-500 to-purple-500"
+-    }`}>
++    <div className={`fixed top-5 right-5 z-50 flex items-center gap-2 px-5 py-3 rounded-2xl shadow-2xl text-white font-semibold text-sm transition-all ${toast.type === "error" ? "bg-red-500" : "bg-gradient-to-r from-pink-500 to-purple-500"
++      }`}>
+@@ -151,2 +151,2 @@ function BannedPage({ banInfo, onLogout }) {
+-  const expiresAt  = banInfo?.ban_expires_at || null;
+-  const reason     = banInfo?.message || "Your account has been suspended.";
++  const expiresAt = banInfo?.ban_expires_at || null;
++  const reason = banInfo?.message || "Your account has been suspended.";
+@@ -154 +154 @@ function BannedPage({ banInfo, onLogout }) {
+-  const [expired,  setExpired]  = useState(false);
++  const [expired, setExpired] = useState(false);
+@@ -163 +163 @@ function BannedPage({ banInfo, onLogout }) {
+-        days:  Math.floor(s / 86400),
++        days: Math.floor(s / 86400),
+@@ -165,2 +165,2 @@ function BannedPage({ banInfo, onLogout }) {
+-        mins:  Math.floor((s % 3600) / 60),
+-        secs:  s % 60,
++        mins: Math.floor((s % 3600) / 60),
++        secs: s % 60,
+@@ -185 +185 @@ function BannedPage({ banInfo, onLogout }) {
+-              width:  `${20 + (i % 4) * 15}px`,
++              width: `${20 + (i % 4) * 15}px`,
+@@ -187,2 +187,2 @@ function BannedPage({ banInfo, onLogout }) {
+-              left:   `${5 + i * 8}%`,
+-              top:    `${8 + (i % 5) * 18}%`,
++              left: `${5 + i * 8}%`,
++              top: `${8 + (i % 5) * 18}%`,
+@@ -219 +219 @@ function BannedPage({ banInfo, onLogout }) {
+-                { v: timeLeft.days,  l: "Days"  },
++                { v: timeLeft.days, l: "Days" },
+@@ -221,2 +221,2 @@ function BannedPage({ banInfo, onLogout }) {
+-                { v: timeLeft.mins,  l: "Mins"  },
+-                { v: timeLeft.secs,  l: "Secs"  },
++                { v: timeLeft.mins, l: "Mins" },
++                { v: timeLeft.secs, l: "Secs" },
+@@ -275 +275 @@ function NotVerifiedModal({ verificationStatus, onClose, onGoVerify }) {
+-  const isPending  = verificationStatus === "pending";
++  const isPending = verificationStatus === "pending";
+@@ -285,5 +285,4 @@ function NotVerifiedModal({ verificationStatus, onClose, onGoVerify }) {
+-        <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
+-          isPending  ? "bg-blue-50"   :
+-          isRejected ? "bg-red-50"    :
+-                       "bg-amber-50"
+-        }`}>
++        <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${isPending ? "bg-blue-50" :
++          isRejected ? "bg-red-50" :
++            "bg-amber-50"
++          }`}>
+@@ -297,3 +296,3 @@ function NotVerifiedModal({ verificationStatus, onClose, onGoVerify }) {
+-          {isPending  ? "Verification in Review"  :
+-           isRejected ? "Verification Rejected"   :
+-                        "Face Verification Required"}
++          {isPending ? "Verification in Review" :
++            isRejected ? "Verification Rejected" :
++              "Face Verification Required"}
+@@ -307,2 +306,2 @@ function NotVerifiedModal({ verificationStatus, onClose, onGoVerify }) {
+-            ? "Your selfie was rejected. Please re-upload a clear, well-lit selfie so our team can verify your identity."
+-            : "You need to verify your face before sending likes or invites. It only takes a minute and keeps our community safe."}
++              ? "Your selfie was rejected. Please re-upload a clear, well-lit selfie so our team can verify your identity."
++              : "You need to verify your face before sending likes or invites. It only takes a minute and keeps our community safe."}
+@@ -335,7 +334,7 @@ const RELATIONSHIP_GOALS = [
+-  { value: "",            label: "Any goal" },
+-  { value: "long_term",   label: "Long-term" },
+-  { value: "short_term",  label: "Short-term" },
+-  { value: "marriage",    label: "Marriage" },
+-  { value: "friendship",  label: "Friendship" },
+-  { value: "casual",      label: "Casual" },
+-  { value: "unsure",      label: "Unsure" },
++  { value: "", label: "Any goal" },
++  { value: "long_term", label: "Long-term" },
++  { value: "short_term", label: "Short-term" },
++  { value: "marriage", label: "Marriage" },
++  { value: "friendship", label: "Friendship" },
++  { value: "casual", label: "Casual" },
++  { value: "unsure", label: "Unsure" },
+@@ -345 +344 @@ const EDUCATION_LEVELS = [
+-  { value: "",                      label: "Any education" },
++  { value: "", label: "Any education" },
+@@ -347,12 +346,12 @@ const EDUCATION_LEVELS = [
+-  { value: "high_school",           label: "High school" },
+-  { value: "some_college",          label: "Some college" },
+-  { value: "associates",            label: "Associate degree" },
+-  { value: "diploma",               label: "Diploma / Certificate" },
+-  { value: "trade_school",          label: "Trade / Vocational school" },
+-  { value: "bachelors",             label: "Bachelor's degree" },
+-  { value: "postgraduate_diploma",  label: "Postgraduate diploma" },
+-  { value: "masters",               label: "Master's degree" },
+-  { value: "professional",          label: "Professional (MD / JD / MBA / CA)" },
+-  { value: "phd",                   label: "PhD / Doctorate" },
+-  { value: "postdoc",               label: "Postdoctoral" },
+-  { value: "other",                 label: "Other" },
++  { value: "high_school", label: "High school" },
++  { value: "some_college", label: "Some college" },
++  { value: "associates", label: "Associate degree" },
++  { value: "diploma", label: "Diploma / Certificate" },
++  { value: "trade_school", label: "Trade / Vocational school" },
++  { value: "bachelors", label: "Bachelor's degree" },
++  { value: "postgraduate_diploma", label: "Postgraduate diploma" },
++  { value: "masters", label: "Master's degree" },
++  { value: "professional", label: "Professional (MD / JD / MBA / CA)" },
++  { value: "phd", label: "PhD / Doctorate" },
++  { value: "postdoc", label: "Postdoctoral" },
++  { value: "other", label: "Other" },
+@@ -412,5 +411,4 @@ function FilterBar({ filters, onChange, onReset, total }) {
+-            className={`px-4 py-2 rounded-xl text-sm font-semibold border-2 flex items-center gap-2 transition ${
+-              open || activeCount > 0
+-                ? "border-pink-400 text-pink-600 bg-pink-50"
+-                : "border-gray-200 text-gray-600 hover:border-pink-200"
+-            }`}>
++            className={`px-4 py-2 rounded-xl text-sm font-semibold border-2 flex items-center gap-2 transition ${open || activeCount > 0
++              ? "border-pink-400 text-pink-600 bg-pink-50"
++              : "border-gray-200 text-gray-600 hover:border-pink-200"
++              }`}>
+@@ -509,2 +507,2 @@ function ProfileDetailModal({ userId, onClose, onLike, onPass, onUnmatch, showTo
+-      if (e.key === "ArrowLeft" && images.length > 1)  { setImgIdx(i => (i - 1 + images.length) % images.length); setAutoPaused(true); }
+-      if (e.key === "ArrowRight" && images.length > 1) { setImgIdx(i => (i + 1) % images.length);                  setAutoPaused(true); }
++      if (e.key === "ArrowLeft" && images.length > 1) { setImgIdx(i => (i - 1 + images.length) % images.length); setAutoPaused(true); }
++      if (e.key === "ArrowRight" && images.length > 1) { setImgIdx(i => (i + 1) % images.length); setAutoPaused(true); }
+@@ -673,2 +671,2 @@ function ProfileDetailModal({ userId, onClose, onLike, onPass, onUnmatch, showTo
+-                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+-                      <Sparkles size={12} className="text-pink-400" /> Ideal first date
++                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1">
++                      <Sparkles size={14} className="text-pink-400" /> Ideal first date
+@@ -676 +674 @@ function ProfileDetailModal({ userId, onClose, onLike, onPass, onUnmatch, showTo
+-                    <p className="text-sm text-gray-700 leading-relaxed italic">"{profile.first_date_idea}"</p>
++                    <p className="text-base text-gray-700 leading-relaxed italic">"{profile.first_date_idea}"</p>
+@@ -710,2 +708,2 @@ function ProfileDetailModal({ userId, onClose, onLike, onPass, onUnmatch, showTo
+-                        ? "Friendship Compatibility"
+-                        : "Long-term Compatibility"}
++                          ? "Friendship Compatibility"
++                          : "Long-term Compatibility"}
+@@ -824 +822 @@ function DetailChip({ Icon, label, value }) {
+-function DiscoverCard({ person, onLike, onPass, onOpen, onGiftLike, onSuperInvite, isMarriage }) {
++function DiscoverCard({ person, onLike, onPass, onOpen, onGiftLike }) {
+@@ -873,18 +871,7 @@ function DiscoverCard({ person, onLike, onPass, onOpen, onGiftLike, onSuperInvit
+-          {isMarriage ? (
+-            /* Super Invite button replaces gift-like for marriage users */
+-            <button
+-              onClick={(e) => { e.stopPropagation(); onSuperInvite?.(person.id); }}
+-              className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-lg shadow-purple-500/50 active:scale-95 transition flex items-center justify-center"
+-              title="Super Invite ΓÇö your profile goes to the top of their feed"
+-            >
+-              Γ¡É
+-            </button>
+-          ) : (
+-            <button
+-              onClick={(e) => { e.stopPropagation(); onGiftLike?.({ id: person.id, name: person.name }); }}
+-              className="w-10 h-10 rounded-full bg-amber-400 hover:bg-amber-500 text-white shadow-lg shadow-amber-400/50 active:scale-95 transition flex items-center justify-center"
+-              title="Super like with gift"
+-            >
+-              <Gift size={17} />
+-            </button>
+-          )}
++          <button
++            onClick={(e) => { e.stopPropagation(); onGiftLike?.({ id: person.id, name: person.name }); }}
++            className="w-10 h-10 rounded-full bg-amber-400 hover:bg-amber-500 text-white shadow-lg shadow-amber-400/50 active:scale-95 transition flex items-center justify-center"
++            title="Super like with gift"
++          >
++            <Gift size={17} />
++          </button>
+@@ -916,3 +903,3 @@ function SwipeCard({ person, onLike, onPass, onOpen, onExit, zIndex, offset, isT
+-  const rotate  = useTransform(x, [-200, 0, 200], [-15, 0, 15]);
+-  const likeOp  = useTransform(x, [40, 140], [0, 1]);
+-  const passOp  = useTransform(x, [-140, -40], [1, 0]);
++  const rotate = useTransform(x, [-200, 0, 200], [-15, 0, 15]);
++  const likeOp = useTransform(x, [40, 140], [0, 1]);
++  const passOp = useTransform(x, [-140, -40], [1, 0]);
+@@ -926,2 +913,2 @@ function SwipeCard({ person, onLike, onPass, onOpen, onExit, zIndex, offset, isT
+-    const swipedRight = info.offset.x >  100 || info.velocity.x >  500;
+-    const swipedLeft  = info.offset.x < -100 || info.velocity.x < -500;
++    const swipedRight = info.offset.x > 100 || info.velocity.x > 500;
++    const swipedLeft = info.offset.x < -100 || info.velocity.x < -500;
+@@ -1138,12 +1124,0 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  // Marriage-specific
+-  const isMarriage = profile?.relationship_goal === "serious_marriage";
+-  const [superInviteBalance, setSuperInviteBalance] = useState(null);
+-  const [showSuperInvitePurchase, setShowSuperInvitePurchase] = useState(false);
+-  const [quotaStatus, setQuotaStatus] = useState(null);
+-
+-  // Load super-invite balance for marriage users
+-  useEffect(() => {
+-    if (!isMarriage) return;
+-    api.superInvites.balance().then(r => setSuperInviteBalance(r.balance ?? 0)).catch(() => {});
+-    api.subscriptions.me().then(r => setQuotaStatus(r.quota)).catch(() => {});
+-  }, [isMarriage]);
+@@ -1154,4 +1129,4 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  const [imInfo, setImInfo]         = useState(null);
+-  const [imState, setImState]       = useState(null);
+-  const [imPartner, setImPartner]   = useState(null);
+-  const [imMatchId, setImMatchId]   = useState(null);
++  const [imInfo, setImInfo] = useState(null);
++  const [imState, setImState] = useState(null);
++  const [imPartner, setImPartner] = useState(null);
++  const [imMatchId, setImMatchId] = useState(null);
+@@ -1162,3 +1137,3 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  const imPollRef    = useRef(null);
+-  const imTimerRef   = useRef(null);
+-  const imCountRef   = useRef(null);  // countdown interval
++  const imPollRef = useRef(null);
++  const imTimerRef = useRef(null);
++  const imCountRef = useRef(null);  // countdown interval
+@@ -1166,2 +1141,2 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  const [imChatMessages,    setImChatMessages]    = useState([]);
+-  const [imChatEnded,       setImChatEnded]       = useState(false);
++  const [imChatMessages, setImChatMessages] = useState([]);
++  const [imChatEnded, setImChatEnded] = useState(false);
+@@ -1169,3 +1144,3 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  const [imChatAccepted,    setImChatAccepted]    = useState(false);
+-  const imChatPollRef  = useRef(null); // status poll interval
+-  const imMsgPollRef   = useRef(null); // message poll interval
++  const [imChatAccepted, setImChatAccepted] = useState(false);
++  const imChatPollRef = useRef(null); // status poll interval
++  const imMsgPollRef = useRef(null); // message poll interval
+@@ -1175 +1150 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    api.instantMatch.info().then(setImInfo).catch(() => {});
++    api.instantMatch.info().then(setImInfo).catch(() => { });
+@@ -1198 +1173 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      } catch (_) {}
++      } catch (_) { }
+@@ -1201 +1176 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    api.messages.history(matchId).then(m => setImChatMessages(m || [])).catch(() => {});
++    api.messages.history(matchId).then(m => setImChatMessages(m || [])).catch(() => { });
+@@ -1210 +1185 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-          if (imMsgPollRef.current)  { clearInterval(imMsgPollRef.current);  imMsgPollRef.current  = null; }
++          if (imMsgPollRef.current) { clearInterval(imMsgPollRef.current); imMsgPollRef.current = null; }
+@@ -1214 +1189 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      } catch (_) {}
++      } catch (_) { }
+@@ -1231 +1206 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    if (imPollRef.current)  { clearInterval(imPollRef.current);  imPollRef.current  = null; }
++    if (imPollRef.current) { clearInterval(imPollRef.current); imPollRef.current = null; }
+@@ -1255 +1230 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      } catch (_) {}
++      } catch (_) { }
+@@ -1263 +1238 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      api.instantMatch.info().then(setImInfo).catch(() => {});
++      api.instantMatch.info().then(setImInfo).catch(() => { });
+@@ -1289 +1264 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-        imPollRef.current  = setInterval(async () => {
++        imPollRef.current = setInterval(async () => {
+@@ -1298 +1273 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-          } catch (_) {}
++          } catch (_) { }
+@@ -1314 +1289 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    try { await api.instantMatch.leave(); } catch (_) {}
++    try { await api.instantMatch.leave(); } catch (_) { }
+@@ -1320 +1295 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    try { await api.instantMatch.skip(); } catch (_) {}
++    try { await api.instantMatch.skip(); } catch (_) { }
+@@ -1335,2 +1310,2 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-    try { await api.instantMatch.chatLeave(matchId); } catch (_) {}
+-    api.instantMatch.info().then(setImInfo).catch(() => {});
++    try { await api.instantMatch.chatLeave(matchId); } catch (_) { }
++    api.instantMatch.info().then(setImInfo).catch(() => { });
+@@ -1367,2 +1342,2 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-        window.dispatchEvent(new CustomEvent("dashboard:go",       { detail: "messages" }));
+-        window.dispatchEvent(new CustomEvent("messages:openMatch",  { detail: imMatchId }));
++        window.dispatchEvent(new CustomEvent("dashboard:go", { detail: "messages" }));
++        window.dispatchEvent(new CustomEvent("messages:openMatch", { detail: imMatchId }));
+@@ -1502,23 +1476,0 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-  async function handleSuperInvite(id) {
+-    const vSt = (profile?.verification_status || (profile?.is_verified ? "approved" : "none")).toLowerCase();
+-    if (!profile?.is_verified && vSt !== "pending") { setShowNotVerified(true); return; }
+-    if (superInviteBalance !== null && superInviteBalance <= 0) {
+-      setShowSuperInvitePurchase(true);
+-      return;
+-    }
+-    try {
+-      const res = await api.matches.superInvite(id);
+-      const partner = candidates.find(p => p.id === id);
+-      setCandidates(prev => prev.filter(p => p.id !== id));
+-      setSuperInviteBalance(b => Math.max(0, (b ?? 1) - 1));
+-      if (res.matched && partner) onMatch(partner);
+-      else showToast("Γ¡É Super Invite sent! Your profile is now at the top of their feed.");
+-    } catch (e) {
+-      if (e.status === 402 && e.code === "quota_exceeded") {
+-        setPaywall({ kind: e.detail?.kind || "heart", plans: e.detail?.plans || [] });
+-        return;
+-      }
+-      showToast(e.message || "Could not send super invite", "error");
+-    }
+-  }
+-
+@@ -1573,50 +1525,2 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      {/* ≡ƒòî Serious Marriage header + daily free-trial status */}
+-      {isMarriage && (
+-        <div className="mb-4 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-2xl space-y-2">
+-          <div className="flex items-center justify-between gap-3">
+-            <div className="flex items-center gap-2">
+-              <span className="text-xl">≡ƒòî</span>
+-              <div>
+-                <p className="text-sm font-bold text-purple-900">Serious Matrimony Feed</p>
+-                <p className="text-xs text-purple-600">Only verified matrimony seekers ΓÇö no casuals</p>
+-              </div>
+-            </div>
+-            {superInviteBalance !== null && (
+-              <button
+-                onClick={() => setShowSuperInvitePurchase(true)}
+-                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-500 text-white text-xs font-semibold hover:bg-purple-600 transition"
+-              >
+-                Γ¡É {superInviteBalance} Super {superInviteBalance === 1 ? "Invite" : "Invites"}
+-              </button>
+-            )}
+-          </div>
+-          {/* Daily free-trial meter */}
+-          {quotaStatus?.gated && (
+-            <div className="flex items-center gap-3 mt-1">
+-              <div className="flex-1 space-y-1">
+-                <div className="flex justify-between text-[10px] text-purple-700">
+-                  <span>Invites {quotaStatus.hearts_used}/{quotaStatus.hearts_limit} free today</span>
+-                  <span>Passes {quotaStatus.passes_used}/{quotaStatus.passes_limit} free today</span>
+-                </div>
+-                <div className="h-1.5 bg-purple-100 rounded-full overflow-hidden">
+-                  <div
+-                    className="h-full bg-purple-400 rounded-full transition-all"
+-                    style={{ width: `${Math.min(100, ((quotaStatus.hearts_used || 0) / (quotaStatus.hearts_limit || 5)) * 100)}%` }}
+-                  />
+-                </div>
+-              </div>
+-              {(quotaStatus.hearts_used >= quotaStatus.hearts_limit || quotaStatus.passes_used >= quotaStatus.passes_limit) && (
+-                <button
+-                  onClick={() => setPaywall({ kind: "heart", plans: [] })}
+-                  className="flex-shrink-0 px-3 py-1.5 bg-purple-500 text-white text-xs font-bold rounded-xl hover:bg-purple-600 transition"
+-                >
+-                  Get Γé╣499/mo
+-                </button>
+-              )}
+-            </div>
+-          )}
+-        </div>
+-      )}
+-
+-      {/* ΓÜí Instant Match button ΓÇö hidden when feature is off, hidden for marriage users */}
+-      {!isMarriage && imInfo?.enabled !== false && (
++      {/* ΓÜí Instant Match button ΓÇö hidden when feature is off */}
++      {imInfo?.enabled !== false && (
+@@ -1634,2 +1538,2 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-                  ? `${imInfo.remaining} free ${imInfo.remaining === 1 ? "use" : "uses"} left today`
+-                  : "Find someone online right now"}
++                    ? `${imInfo.remaining} free ${imInfo.remaining === 1 ? "use" : "uses"} left today`
++                    : "Find someone online right now"}
+@@ -1694,3 +1598 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-                  onGiftLike={setGiftTarget}
+-                  onSuperInvite={handleSuperInvite}
+-                  isMarriage={isMarriage} />
++                  onGiftLike={setGiftTarget} />
+@@ -1770,27 +1671,0 @@ function DiscoverView({ showToast, onMatch, profile }) {
+-      {/* Marriage free-trial-over paywall */}
+-      {isMarriage && paywall && (
+-        <MarriagePaywallModal
+-          kind={paywall.kind}
+-          onClose={() => setPaywall(null)}
+-          onUpgraded={() => {
+-            setPaywall(null);
+-            showToast?.("Marriage plan activated Γ£¿");
+-          }}
+-          showToast={showToast}
+-        />
+-      )}
+-
+-      {/* Super Invite purchase modal */}
+-      {showSuperInvitePurchase && (
+-        <SuperInvitePurchaseModal
+-          onClose={() => setShowSuperInvitePurchase(false)}
+-          onPurchased={(newBalance) => {
+-            setSuperInviteBalance(newBalance);
+-            setShowSuperInvitePurchase(false);
+-            showToast?.("5 Super Invites added! Γ¡É");
+-          }}
+-          showToast={showToast}
+-          profile={profile}
+-        />
+-      )}
+-
+@@ -1903 +1778 @@ function InstantMatchFoundModal({ me, partner, countdown, onStartChat, onSkip })
+-  const CIRC   = 2 * Math.PI * RADIUS;
++  const CIRC = 2 * Math.PI * RADIUS;
+@@ -1905 +1780 @@ function InstantMatchFoundModal({ me, partner, countdown, onStartChat, onSkip })
+-  const dash     = CIRC * progress;
++  const dash = CIRC * progress;
+@@ -2028,5 +1903,4 @@ function InstantMatchChatOverlay({
+-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex-shrink-0 ${
+-              inviteStatus === "sent"
+-                ? "bg-white/20 text-white/60 cursor-default"
+-                : "bg-white/20 hover:bg-white/30 text-white"
+-            }`}
++            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex-shrink-0 ${inviteStatus === "sent"
++              ? "bg-white/20 text-white/60 cursor-default"
++              : "bg-white/20 hover:bg-white/30 text-white"
++              }`}
+@@ -2143,5 +2017,4 @@ function InstantMatchChatOverlay({
+-                <div className={`px-4 py-2.5 rounded-2xl text-sm leading-snug whitespace-pre-wrap break-words ${
+-                  isMe
+-                    ? "bg-gradient-to-br from-violet-500 to-pink-500 text-white rounded-br-sm"
+-                    : "bg-gray-100 text-gray-900 rounded-bl-sm"
+-                }`}>
++                <div className={`px-4 py-2.5 rounded-2xl text-sm leading-snug whitespace-pre-wrap break-words ${isMe
++                  ? "bg-gradient-to-br from-violet-500 to-pink-500 text-white rounded-br-sm"
++                  : "bg-gray-100 text-gray-900 rounded-bl-sm"
++                  }`}>
+@@ -2196,158 +2068,0 @@ function InstantMatchChatOverlay({
+-// ΓöÇΓöÇΓöÇ Marriage Paywall Modal ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+-function MarriagePaywallModal({ kind, onClose, onUpgraded, showToast }) {
+-  const [loading, setLoading] = useState(false);
+-
+-  async function handlePurchase() {
+-    setLoading(true);
+-    try {
+-      const order = await api.subscriptions.order("marriage_monthly");
+-      if (order.is_mock) {
+-        await api.subscriptions.verify(order.order_id, "mock_payment_id", "mock_signature", "marriage_monthly");
+-        onUpgraded?.();
+-        return;
+-      }
+-      const rzp = new window.Razorpay({
+-        key: order.key_id,
+-        amount: order.amount_paise,
+-        currency: order.currency,
+-        name: "Serious Matrimony",
+-        description: "Γé╣499/month ΓÇö Unlimited access",
+-        order_id: order.order_id,
+-        prefill: order.prefill || {},
+-        handler: async (resp) => {
+-          try {
+-            await api.subscriptions.verify(order.order_id, resp.razorpay_payment_id, resp.razorpay_signature, "marriage_monthly");
+-            onUpgraded?.();
+-          } catch (e) {
+-            showToast?.(e.message || "Payment verification failed", "error");
+-          }
+-        },
+-      });
+-      rzp.open();
+-    } catch (e) {
+-      showToast?.(e.message || "Could not initiate payment", "error");
+-    } finally {
+-      setLoading(false);
+-    }
+-  }
+-
+-  const isLimitHit = kind === "heart" || kind === "pass";
+-  return (
+-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden">
+-        <div className="bg-gradient-to-br from-purple-600 to-indigo-600 p-6 text-center text-white">
+-          <div className="text-4xl mb-2">≡ƒòî</div>
+-          <h2 className="text-xl font-bold">
+-            {isLimitHit ? "Free trial used up for today" : "Unlock Serious Matrimony"}
+-          </h2>
+-          <p className="text-sm text-white/80 mt-1">
+-            {isLimitHit
+-              ? "You've used your 5 free invites / 10 free passes for today."
+-              : "Unlimited access to India's serious matrimony pool."}
+-          </p>
+-        </div>
+-        <div className="p-5 space-y-3">
+-          <div className="flex items-center gap-3 p-3.5 bg-purple-50 rounded-xl">
+-            <span className="text-2xl">≡ƒÆì</span>
+-            <div>
+-              <p className="font-bold text-gray-900">Γé╣499 / month</p>
+-              <p className="text-xs text-gray-500">Unlimited invites ┬╖ Unlimited passes ┬╖ Priority listing</p>
+-            </div>
+-          </div>
+-          <div className="flex items-center gap-2 text-xs text-gray-500 px-1">
+-            <span>Γ£à</span><span>Only serious matrimony seekers in your feed</span>
+-          </div>
+-          <div className="flex items-center gap-2 text-xs text-gray-500 px-1">
+-            <span>Γ£à</span><span>Women get full access for free</span>
+-          </div>
+-          <div className="flex items-center gap-2 text-xs text-gray-500 px-1">
+-            <span>Γ¡É</span><span>Buy Super Invites to appear at top of her feed</span>
+-          </div>
+-          <button
+-            onClick={handlePurchase}
+-            disabled={loading}
+-            className="w-full py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-purple-200 hover:opacity-90 transition disabled:opacity-50"
+-          >
+-            {loading ? "Please waitΓÇª" : "Get Γé╣499/month plan"}
+-          </button>
+-          <button onClick={onClose} className="w-full text-center text-sm text-gray-400 hover:text-gray-600 py-1">
+-            Maybe later
+-          </button>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
+-
+-// ΓöÇΓöÇΓöÇ Super Invite Purchase Modal ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+-function SuperInvitePurchaseModal({ onClose, onPurchased, showToast, profile }) {
+-  const [loading, setLoading] = useState(false);
+-
+-  async function handlePurchase() {
+-    setLoading(true);
+-    try {
+-      const order = await api.superInvites.order();
+-      if (order.is_mock) {
+-        const res = await api.superInvites.verify(order.order_id, "mock_payment_id", "mock_signature");
+-        onPurchased?.(res.balance);
+-        return;
+-      }
+-      const rzp = new window.Razorpay({
+-        key: order.key_id,
+-        amount: order.amount_paise,
+-        currency: order.currency,
+-        name: "Super Invites",
+-        description: "5 Super Invites ΓÇö Γé╣100",
+-        order_id: order.order_id,
+-        prefill: order.prefill || {},
+-        handler: async (resp) => {
+-          try {
+-            const res = await api.superInvites.verify(order.order_id, resp.razorpay_payment_id, resp.razorpay_signature);
+-            onPurchased?.(res.balance);
+-          } catch (e) {
+-            showToast?.(e.message || "Payment verification failed", "error");
+-          }
+-        },
+-      });
+-      rzp.open();
+-    } catch (e) {
+-      showToast?.(e.message || "Could not initiate payment", "error");
+-    } finally {
+-      setLoading(false);
+-    }
+-  }
+-
+-  return (
+-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden">
+-        <div className="bg-gradient-to-br from-amber-400 to-purple-600 p-6 text-center text-white">
+-          <div className="text-4xl mb-2">Γ¡É</div>
+-          <h2 className="text-xl font-bold">Buy Super Invites</h2>
+-          <p className="text-sm text-white/80 mt-1">Your profile goes to the top of her feed instantly</p>
+-        </div>
+-        <div className="p-5 space-y-3">
+-          <div className="flex items-center gap-3 p-3.5 bg-amber-50 rounded-xl border border-amber-100">
+-            <span className="text-2xl">Γ¡É</span>
+-            <div className="flex-1">
+-              <p className="font-bold text-gray-900">5 Super Invites</p>
+-              <p className="text-xs text-gray-500">Stand out ΓÇö your profile pins to the top of her Discover</p>
+-            </div>
+-            <span className="font-black text-purple-700 text-lg">Γé╣100</span>
+-          </div>
+-          <p className="text-xs text-gray-400 px-1">Super Invites don't expire ΓÇö use them whenever you want.</p>
+-          <button
+-            onClick={handlePurchase}
+-            disabled={loading}
+-            className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-purple-600 text-white font-bold text-sm shadow-lg hover:opacity-90 transition disabled:opacity-50"
+-          >
+-            {loading ? "Please waitΓÇª" : "Buy 5 for Γé╣100"}
+-          </button>
+-          <button onClick={onClose} className="w-full text-center text-sm text-gray-400 hover:text-gray-600 py-1">
+-            Not now
+-          </button>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
+-
+@@ -2407,6 +2122,6 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-  const [activeConvo, setActiveConvo]   = useState(null);
+-  const [messages, setMessages]         = useState([]);
+-  const [chatLoading, setChatLoading]   = useState(false);
+-  const [draft, setDraft]               = useState("");
+-  const [sending, setSending]           = useState(false);
+-  const [search, setSearch]             = useState("");
++  const [activeConvo, setActiveConvo] = useState(null);
++  const [messages, setMessages] = useState([]);
++  const [chatLoading, setChatLoading] = useState(false);
++  const [draft, setDraft] = useState("");
++  const [sending, setSending] = useState(false);
++  const [search, setSearch] = useState("");
+@@ -2420 +2135 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-  const inputRef  = useRef();
++  const inputRef = useRef();
+@@ -2438 +2153 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-            api.messages.markRead(match_id).catch(() => {});
++            api.messages.markRead(match_id).catch(() => { });
+@@ -2516 +2231 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-        api.messages.markRead(activeConvo.match_id).catch(() => {});
++        api.messages.markRead(activeConvo.match_id).catch(() => { });
+@@ -2557 +2272 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-    typingTimer.current = setTimeout(() => {}, 1500);
++    typingTimer.current = setTimeout(() => { }, 1500);
+@@ -2604,3 +2319,2 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                  className={`w-full flex items-center gap-3 px-4 py-3 transition-all text-left ${
+-                    isActive ? "bg-pink-50 border-r-2 border-pink-500" : "hover:bg-gray-50"
+-                  }`}>
++                  className={`w-full flex items-center gap-3 px-4 py-3 transition-all text-left ${isActive ? "bg-pink-50 border-r-2 border-pink-500" : "hover:bg-gray-50"
++                    }`}>
+@@ -2779,5 +2493,4 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium border ${
+-                          msg.content.startsWith("≡ƒô╡")
+-                            ? "bg-rose-50 text-rose-600 border-rose-200"
+-                            : "bg-gray-50 text-gray-600 border-gray-200"
+-                        }`}>
++                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium border ${msg.content.startsWith("≡ƒô╡")
++                          ? "bg-rose-50 text-rose-600 border-rose-200"
++                          : "bg-gray-50 text-gray-600 border-gray-200"
++                          }`}>
+@@ -2785 +2498 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                                : msg.content}
++                            : msg.content}
+@@ -2790,14 +2503,13 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                    <div className={`flex items-end gap-2 ${isMe ? "justify-end" : "justify-start"}`}>
+-                      {!isMe && (
+-                        <img src={avatar(activeConvo.partner)} alt=""
+-                          className="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-0.5" />
+-                      )}
+-                      <div className={`max-w-[65%] ${isMe ? "items-end" : "items-start"} flex flex-col`}>
+-                        {msg.gift_send_id && msg.gift ? (
+-                          // Gift messages replace the plain bubble with a
+-                          // highlighted gift card so they stand out
+-                          // permanently in chat history.
+-                          <GiftChatCard gift={msg.gift} cost={msg.gift_send?.cost} isMine={isMe} />
+-                        ) : (
+-                          <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+-                            isMe
++                      <div className={`flex items-end gap-2 ${isMe ? "justify-end" : "justify-start"}`}>
++                        {!isMe && (
++                          <img src={avatar(activeConvo.partner)} alt=""
++                            className="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-0.5" />
++                        )}
++                        <div className={`max-w-[65%] ${isMe ? "items-end" : "items-start"} flex flex-col`}>
++                          {msg.gift_send_id && msg.gift ? (
++                            // Gift messages replace the plain bubble with a
++                            // highlighted gift card so they stand out
++                            // permanently in chat history.
++                            <GiftChatCard gift={msg.gift} cost={msg.gift_send?.cost} isMine={isMe} />
++                          ) : (
++                            <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${isMe
+@@ -2806,12 +2518,3 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                          }`}>
+-                            {msg.content}
+-                          </div>
+-                        )}
+-                        <div className={`flex items-center gap-1 mt-0.5 ${isMe ? "justify-end" : ""}`}>
+-                          <span className="text-[10px] text-gray-400">{formatMsgTime(msg.created_at)}</span>
+-                          {isMe && (
+-                            msg.is_read
+-                              ? <CheckCheck size={11} className="text-pink-400" />
+-                              : msg.is_delivered
+-                                ? <CheckCheck size={11} className="text-gray-300" />
+-                                : <Check size={11} className="text-gray-300" />
++                              }`}>
++                              {msg.content}
++                            </div>
+@@ -2818,0 +2522,10 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
++                          <div className={`flex items-center gap-1 mt-0.5 ${isMe ? "justify-end" : ""}`}>
++                            <span className="text-[10px] text-gray-400">{formatMsgTime(msg.created_at)}</span>
++                            {isMe && (
++                              msg.is_read
++                                ? <CheckCheck size={11} className="text-pink-400" />
++                                : msg.is_delivered
++                                  ? <CheckCheck size={11} className="text-gray-300" />
++                                  : <Check size={11} className="text-gray-300" />
++                            )}
++                          </div>
+@@ -2821 +2533,0 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                    </div>
+@@ -2913,22 +2625,22 @@ function MessagesView({ userId, showToast, conversations, setConversations, conv
+-                onUnmatch: async (partnerId, partnerProfile) => {
+-                  try {
+-                    await api.matches.unmatch(partnerId);
+-                    // Soft-remove: keep the conversation, just mark it ended so
+-                    // both sides still have the history as a read-only archive.
+-                    const nowIso = new Date().toISOString();
+-                    setConversations(prev => prev.map(c =>
+-                      c.partner?.id === partnerId
+-                        ? { ...c, removed_at: nowIso, removed_by: userId }
+-                        : c
+-                    ));
+-                    setActiveConvo(curr =>
+-                      curr?.partner?.id === partnerId
+-                        ? { ...curr, removed_at: nowIso, removed_by: userId }
+-                        : curr
+-                    );
+-                    showToast(`Removed ${partnerProfile?.name || "friend"}. Chat is now read-only.`);
+-                  } catch (e) {
+-                    showToast(e.message || "Could not remove friend", "error");
+-                  }
+-                },
+-              })}
++              onUnmatch: async (partnerId, partnerProfile) => {
++                try {
++                  await api.matches.unmatch(partnerId);
++                  // Soft-remove: keep the conversation, just mark it ended so
++                  // both sides still have the history as a read-only archive.
++                  const nowIso = new Date().toISOString();
++                  setConversations(prev => prev.map(c =>
++                    c.partner?.id === partnerId
++                      ? { ...c, removed_at: nowIso, removed_by: userId }
++                      : c
++                  ));
++                  setActiveConvo(curr =>
++                    curr?.partner?.id === partnerId
++                      ? { ...curr, removed_at: nowIso, removed_by: userId }
++                      : curr
++                  );
++                  showToast(`Removed ${partnerProfile?.name || "friend"}. Chat is now read-only.`);
++                } catch (e) {
++                  showToast(e.message || "Could not remove friend", "error");
++                }
++              },
++            })}
+@@ -3004 +2716 @@ function LikesView({ showToast }) {
+-      api.matches.likesSent().then(setSent).catch(() => {});
++      api.matches.likesSent().then(setSent).catch(() => { });
+@@ -3028 +2740 @@ function LikesView({ showToast }) {
+-      api.matches.likesSent().then(setSent).catch(() => {});
++      api.matches.likesSent().then(setSent).catch(() => { });
+@@ -3046,5 +2758,4 @@ function LikesView({ showToast }) {
+-          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${
+-            tab === "received"
+-              ? "border-pink-500 text-pink-600"
+-              : "border-transparent text-gray-500 hover:text-gray-700"
+-          }`}
++          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${tab === "received"
++            ? "border-pink-500 text-pink-600"
++            : "border-transparent text-gray-500 hover:text-gray-700"
++            }`}
+@@ -3056,5 +2767,4 @@ function LikesView({ showToast }) {
+-          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${
+-            tab === "sent"
+-              ? "border-pink-500 text-pink-600"
+-              : "border-transparent text-gray-500 hover:text-gray-700"
+-          }`}
++          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${tab === "sent"
++            ? "border-pink-500 text-pink-600"
++            : "border-transparent text-gray-500 hover:text-gray-700"
++            }`}
+@@ -3066,5 +2776,4 @@ function LikesView({ showToast }) {
+-          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${
+-            tab === "disliked"
+-              ? "border-pink-500 text-pink-600"
+-              : "border-transparent text-gray-500 hover:text-gray-700"
+-          }`}
++          className={`px-4 py-2.5 text-sm font-semibold border-b-2 transition ${tab === "disliked"
++            ? "border-pink-500 text-pink-600"
++            : "border-transparent text-gray-500 hover:text-gray-700"
++            }`}
+@@ -3080,4 +2789,4 @@ function LikesView({ showToast }) {
+-            { id: "all",      label: "All",       cls: "bg-gray-900 text-white" },
+-            { id: "pending",  label: "Pending",   cls: "bg-amber-500 text-white" },
+-            { id: "accepted", label: "Accepted",  cls: "bg-emerald-500 text-white" },
+-            { id: "rejected", label: "Rejected",  cls: "bg-rose-500 text-white" },
++            { id: "all", label: "All", cls: "bg-gray-900 text-white" },
++            { id: "pending", label: "Pending", cls: "bg-amber-500 text-white" },
++            { id: "accepted", label: "Accepted", cls: "bg-emerald-500 text-white" },
++            { id: "rejected", label: "Rejected", cls: "bg-rose-500 text-white" },
+@@ -3088,5 +2797,4 @@ function LikesView({ showToast }) {
+-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
+-                sentFilter === f.id
+-                  ? f.cls + " shadow"
+-                  : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+-              }`}
++              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${sentFilter === f.id
++                ? f.cls + " shadow"
++                : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
++                }`}
+@@ -3179 +2887 @@ function LikesView({ showToast }) {
+-                    {status === "pending"  && "ΓÅ│ Awaiting response"}
++                    {status === "pending" && "ΓÅ│ Awaiting response"}
+@@ -3246,10 +2954,10 @@ function LikesView({ showToast }) {
+-                  onUnmatch: async (partnerId, partnerProfile) => {
+-                    try {
+-                      await api.matches.unmatch(partnerId);
+-                      setSent(prev => prev.filter(s => s.profile.id !== partnerId));
+-                      showToast(`Removed ${partnerProfile?.name || "friend"}`);
+-                    } catch (e) {
+-                      showToast(e.message || "Could not remove friend", "error");
+-                    }
+-                  },
+-                }
++                onUnmatch: async (partnerId, partnerProfile) => {
++                  try {
++                    await api.matches.unmatch(partnerId);
++                    setSent(prev => prev.filter(s => s.profile.id !== partnerId));
++                    showToast(`Removed ${partnerProfile?.name || "friend"}`);
++                  } catch (e) {
++                    showToast(e.message || "Could not remove friend", "error");
++                  }
++                },
++              }
+@@ -3257,16 +2965,16 @@ function LikesView({ showToast }) {
+-                  onLike: async (id) => {
+-                    if (openContext === "received") {
+-                      await acceptLike(id);
+-                    } else if (openContext === "disliked") {
+-                      await sendRequest(id);
+-                    } else {
+-                      showToast("You've already liked this person");
+-                    }
+-                  },
+-                  onPass: async (id) => {
+-                    if (openContext === "received") {
+-                      await rejectLike(id);
+-                    }
+-                    // For sent / disliked: X just closes, no server action
+-                  },
+-                })}
++                onLike: async (id) => {
++                  if (openContext === "received") {
++                    await acceptLike(id);
++                  } else if (openContext === "disliked") {
++                    await sendRequest(id);
++                  } else {
++                    showToast("You've already liked this person");
++                  }
++                },
++                onPass: async (id) => {
++                  if (openContext === "received") {
++                    await rejectLike(id);
++                  }
++                  // For sent / disliked: X just closes, no server action
++                },
++              })}
+@@ -3282,3 +2990,3 @@ function StatusBadge({ status }) {
+-    pending:  { cls: "bg-amber-500",    label: "Pending"  },
+-    accepted: { cls: "bg-emerald-500",  label: "Accepted" },
+-    rejected: { cls: "bg-rose-500",     label: "Rejected" },
++    pending: { cls: "bg-amber-500", label: "Pending" },
++    accepted: { cls: "bg-emerald-500", label: "Accepted" },
++    rejected: { cls: "bg-rose-500", label: "Rejected" },
+@@ -3372,0 +3081,141 @@ function lifestyleLabel(kind, value) {
++const LANGUAGE_OPTIONS = [
++  { value: "English", label: "English" },
++  { value: "Hindi", label: "Hindi" },
++  { value: "Tamil", label: "Tamil" },
++  { value: "Telugu", label: "Telugu" },
++  { value: "Kannada", label: "Kannada" },
++  { value: "Malayalam", label: "Malayalam" },
++  { value: "Bengali", label: "Bengali" },
++  { value: "Marathi", label: "Marathi" },
++  { value: "Gujarati", label: "Gujarati" },
++  { value: "Punjabi", label: "Punjabi" },
++  { value: "Urdu", label: "Urdu" },
++  { value: "Spanish", label: "Spanish" },
++  { value: "French", label: "French" },
++  { value: "German", label: "German" },
++  { value: "Chinese", label: "Chinese" },
++  { value: "Japanese", label: "Japanese" },
++  { value: "Korean", label: "Korean" },
++  { value: "Arabic", label: "Arabic" },
++  { value: "Portuguese", label: "Portuguese" },
++  { value: "Russian", label: "Russian" },
++  { value: "Italian", label: "Italian" },
++  { value: "Other", label: "Other" },
++];
++
++const VIBES_OPTIONS = [
++  { value: "adventurous", label: "Adventurous", emoji: "≡ƒºù" },
++  { value: "romantic", label: "Romantic", emoji: "≡ƒî╣" },
++  { value: "funny", label: "Funny", emoji: "≡ƒÿé" },
++  { value: "intellectual", label: "Intellectual", emoji: "≡ƒºá" },
++  { value: "creative", label: "Creative", emoji: "≡ƒÄ¿" },
++  { value: "chill", label: "Chill", emoji: "≡ƒÿÄ" },
++  { value: "ambitious", label: "Ambitious", emoji: "≡ƒÜÇ" },
++  { value: "foodie", label: "Foodie", emoji: "≡ƒì£" },
++  { value: "spiritual", label: "Spiritual", emoji: "≡ƒòè∩╕Å" },
++  { value: "nerdy", label: "Nerdy", emoji: "≡ƒñô" },
++  { value: "sporty", label: "Sporty", emoji: "ΓÜ╜" },
++  { value: "artsy", label: "Artsy", emoji: "≡ƒûî∩╕Å" },
++  { value: "homebody", label: "Homebody", emoji: "≡ƒÅí" },
++  { value: "social", label: "Social", emoji: "≡ƒÄë" },
++  { value: "wanderlust", label: "Wanderlust", emoji: "Γ£ê∩╕Å" },
++  { value: "music_lover", label: "Music Lover", emoji: "≡ƒÄ╡" },
++  { value: "night_owl", label: "Night Owl", emoji: "≡ƒªë" },
++  { value: "morning_person", label: "Morning Person", emoji: "ΓÿÇ∩╕Å" },
++  { value: "dog_person", label: "Dog Person", emoji: "≡ƒÉ╢" },
++  { value: "cat_person", label: "Cat Person", emoji: "≡ƒÉ▒" },
++];
++
++const HOBBIES_OPTIONS = [
++  { value: "travel", label: "Travel", emoji: "≡ƒîì" },
++  { value: "music", label: "Music", emoji: "≡ƒÄ╕" },
++  { value: "reading", label: "Reading", emoji: "≡ƒôÜ" },
++  { value: "cooking", label: "Cooking", emoji: "≡ƒæ¿ΓÇì≡ƒì│" },
++  { value: "fitness", label: "Fitness", emoji: "≡ƒÆ¬" },
++  { value: "photography", label: "Photography", emoji: "≡ƒô╕" },
++  { value: "gaming", label: "Gaming", emoji: "≡ƒÄ«" },
++  { value: "dancing", label: "Dancing", emoji: "≡ƒÆâ" },
++  { value: "hiking", label: "Hiking", emoji: "≡ƒÅö∩╕Å" },
++  { value: "yoga", label: "Yoga", emoji: "≡ƒºÿ" },
++  { value: "art", label: "Art & Drawing", emoji: "≡ƒÄ¿" },
++  { value: "writing", label: "Writing", emoji: "Γ£ì∩╕Å" },
++  { value: "cycling", label: "Cycling", emoji: "≡ƒÜ┤" },
++  { value: "movies", label: "Movies", emoji: "≡ƒÄ¼" },
++  { value: "binging", label: "Binge Watching", emoji: "≡ƒô║" },
++  { value: "sports", label: "Sports", emoji: "≡ƒÅà" },
++  { value: "meditation", label: "Meditation", emoji: "≡ƒºÿΓÇìΓÖÇ∩╕Å" },
++  { value: "DIY", label: "DIY & Crafts", emoji: "≡ƒ¢á∩╕Å" },
++  { value: "pets", label: "Pets", emoji: "≡ƒÉ╛" },
++  { value: "volunteering", label: "Volunteering", emoji: "≡ƒñ¥" },
++];
++
++function MultiSelectDropdown({ label, options, value = [], onChange }) {
++  const [open, setOpen] = useState(false);
++  const ref = useRef();
++
++  useEffect(() => {
++    function handleClick(e) {
++      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
++    }
++    document.addEventListener("mousedown", handleClick);
++    return () => document.removeEventListener("mousedown", handleClick);
++  }, []);
++
++  function toggle(val) {
++    if (value.includes(val)) onChange(value.filter(v => v !== val));
++    else onChange([...value, val]);
++  }
++
++  const selectedLabels = value.map(v => {
++    const o = options.find(x => x.value === v);
++    return o ? o.label : v;
++  });
++
++  return (
++    <div ref={ref} className="relative">
++      <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">{label}</label>
++      <button
++        type="button"
++        onClick={() => setOpen(o => !o)}
++        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-left focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white flex items-center justify-between gap-2 min-h-[38px]"
++      >
++        <span className="flex flex-wrap gap-1 flex-1 min-w-0 overflow-hidden">
++          {selectedLabels.length === 0
++            ? <span className="text-gray-400">Select {label.toLowerCase()}ΓÇª</span>
++            : (
++              <>
++                {selectedLabels.slice(0, 2).map((l, i) => (
++                  <span key={i} className="inline-flex items-center bg-rose-50 text-rose-700 text-[11px] font-medium px-2 py-0.5 rounded-full border border-rose-100 whitespace-nowrap">{l}</span>
++                ))}
++                {selectedLabels.length > 2 && (
++                  <span className="inline-flex items-center bg-gray-100 text-gray-600 text-[11px] font-medium px-2 py-0.5 rounded-full border border-gray-200 whitespace-nowrap">+{selectedLabels.length - 2}</span>
++                )}
++              </>
++            )
++          }
++        </span>
++        <svg className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
++      </button>
++      {open && (
++        <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-[9999] max-h-52 overflow-y-auto">
++          {options.map(opt => {
++            const selected = value.includes(opt.value);
++            return (
++              <button
++                key={opt.value}
++                type="button"
++                onClick={() => toggle(opt.value)}
++                className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-rose-50 transition ${selected ? "bg-rose-50/60 text-rose-700 font-medium" : "text-gray-700"}`}
++              >
++                <span className="text-base leading-none">{opt.emoji}</span>
++                <span className="flex-1">{opt.label}</span>
++                {selected && <svg className="w-3.5 h-3.5 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>}
++              </button>
++            );
++          })}
++        </div>
++      )}
++    </div>
++  );
++}
++
+@@ -3378 +3227 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-    hobbies: "", vibes: "",
++    hobbies: [], vibes: [],
+@@ -3382 +3231 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-    religion: "", languages: "", height_cm: "",
++    religion: "", languages: [], height_cm: "",
+@@ -3383,0 +3233 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++    workplace: "", college_university: "",
+@@ -3409,2 +3259,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-      hobbies: (profile?.hobbies || []).join(", "),
+-      vibes: (profile?.vibes || []).join(", "),
++      hobbies: profile?.hobbies || [],
++      vibes: profile?.vibes || [],
+@@ -3418 +3268 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-      languages: (profile?.languages || []).join(", "),
++      languages: profile?.languages || [],
+@@ -3420,0 +3271,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++      workplace: profile?.workplace || "",
++      college_university: profile?.college_university || "",
+@@ -3443,0 +3296,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++        workplace: form.workplace.trim() || undefined,
++        college_university: form.college_university.trim() || undefined,
+@@ -3448,2 +3302,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        hobbies: form.hobbies.split(",").map(s => s.trim()).filter(Boolean),
+-        vibes: form.vibes.split(",").map(s => s.trim()).filter(Boolean),
++        hobbies: form.hobbies,
++        vibes: form.vibes,
+@@ -3457 +3311 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        languages: form.languages.split(",").map(s => s.trim()).filter(Boolean),
++        languages: (form.languages && form.languages.length) ? form.languages : undefined,
+@@ -3523,0 +3378 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++    ["Workplace", profile.workplace || "N/A"],
+@@ -3524,0 +3380 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++    ["College", profile.college_university || "N/A"],
+@@ -3543 +3399 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-      <div className="max-w-7xl mx-auto space-y-4 md:space-y-5">
++      <div className="max-w-[1400px] mx-auto space-y-4 md:space-y-5">
+@@ -3625,3 +3481,3 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 items-start">
+-          <div className="lg:col-span-2 space-y-4 md:space-y-5 min-w-0">
+-        {/* ΓöÇΓöÇ HERO CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
++        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 items-start">
++          <div className="lg:col-span-2 lg:pr-4 space-y-5 md:space-y-6 min-w-0">
++            {/* ΓöÇΓöÇ HERO CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+@@ -3630,28 +3486,28 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        <section className="relative bg-white rounded-3xl shadow-sm border border-rose-100/60 p-4 md:p-5 overflow-hidden">
+-          <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
+-            {editing ? (
+-              <>
+-                <button
+-                  onClick={() => setEditing(false)}
+-                  disabled={saving}
+-                  className="px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-gray-50 transition disabled:opacity-50"
+-                >
+-                  Cancel
+-                </button>
+-                <button
+-                  onClick={handleSave}
+-                  disabled={saving}
+-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-semibold hover:from-pink-600 hover:to-rose-600 transition shadow-sm disabled:opacity-50"
+-                >
+-                  <Save size={13} /> {saving ? "SavingΓÇª" : "Save"}
+-                </button>
+-              </>
+-            ) : (
+-              <button
+-                onClick={startEdit}
+-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-rose-200 text-rose-600 text-xs font-semibold hover:bg-rose-50 transition shadow-sm"
+-              >
+-                <Edit2 size={13} /> Edit
+-              </button>
+-            )}
+-          </div>
++            <section className="relative bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6 max-w-[2000px]">
++              <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
++                {editing ? (
++                  <>
++                    <button
++                      onClick={() => setEditing(false)}
++                      disabled={saving}
++                      className="px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-gray-50 transition disabled:opacity-50"
++                    >
++                      Cancel
++                    </button>
++                    <button
++                      onClick={handleSave}
++                      disabled={saving}
++                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-semibold hover:from-pink-600 hover:to-rose-600 transition shadow-sm disabled:opacity-50"
++                    >
++                      <Save size={13} /> {saving ? "SavingΓÇª" : "Save"}
++                    </button>
++                  </>
++                ) : (
++                  <button
++                    onClick={startEdit}
++                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-rose-200 text-rose-600 text-xs font-semibold hover:bg-rose-50 transition shadow-sm"
++                  >
++                    <Edit2 size={13} /> Edit
++                  </button>
++                )}
++              </div>
+@@ -3659,2 +3515,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-          <div className="flex flex-col sm:flex-row gap-4 md:gap-5">
+-            {/* Portrait photo ΓÇö tall aspect like the reference. Clicking opens
++              <div className="flex flex-col sm:flex-row gap-5 md:gap-6">
++                {/* Portrait photo ΓÇö tall aspect like the reference. Clicking opens
+@@ -3662,7 +3518,133 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-            <div className="flex-shrink-0 relative">
+-              <img
+-                src={avatar(profile)}
+-                alt={profile.name}
+-                className="w-full sm:w-48 md:w-52 aspect-[3/4] sm:aspect-[4/5] rounded-2xl object-cover bg-rose-100"
+-              />
+-              {editing && (
++                <div className="flex-shrink-0 relative">
++                  <img
++                    src={avatar(profile)}
++                    alt={profile.name}
++                    className="w-full sm:w-48 md:w-56 aspect-[3/4] rounded-2xl object-cover bg-rose-100"
++                  />
++                  {editing && (
++                    <button
++                      onClick={() => fileRef.current?.click()}
++                      className="absolute bottom-2 right-2 bg-white/95 text-gray-700 rounded-full p-1.5 shadow-md hover:bg-white transition"
++                      title="Upload photo"
++                    >
++                      <Camera size={14} />
++                    </button>
++                  )}
++                </div>
++
++                {/* Identity + bio + chips */}
++                <div className="flex-1 min-w-0 pt-1 pr-2 sm:pr-4 md:pr-16">
++                  {editing ? (
++                    <div className="space-y-2.5 mt-2 sm:mt-4">
++                      <div className="grid grid-cols-3 gap-2">
++                        <div className="col-span-2">
++                          <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Name</label>
++                          <input
++                            value={form.name}
++                            onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))}
++                            placeholder="Your name"
++                            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500"
++                          />
++                        </div>
++                        <div>
++                          <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Age</label>
++                          <input
++                            type="number"
++                            value={form.age}
++                            onChange={(e) => setForm(f => ({ ...f, age: e.target.value }))}
++                            placeholder="Age"
++                            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
++                          />
++                        </div>
++                      </div>
++                      <div>
++                        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Bio</label>
++                        <textarea
++                          value={form.bio}
++                          onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))}
++                          rows={3}
++                          maxLength={300}
++                          placeholder="Tell people a bit about yourselfΓÇª"
++                          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
++                        />
++                      </div>
++                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
++                        <MultiSelectDropdown
++                          label="Vibes"
++                          options={VIBES_OPTIONS}
++                          value={form.vibes}
++                          onChange={(v) => setForm(f => ({ ...f, vibes: v }))}
++                        />
++                        <MultiSelectDropdown
++                          label="Hobbies"
++                          options={HOBBIES_OPTIONS}
++                          value={form.hobbies}
++                          onChange={(v) => setForm(f => ({ ...f, hobbies: v }))}
++                        />
++                      </div>
++                    </div>
++                  ) : (
++                    <>
++                      <div className="flex items-center gap-2.5 flex-wrap">
++                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
++                          {profile.name}{profile.age ? `, ${profile.age}` : ""}
++                        </h2>
++                        {profile.is_verified && (
++                          <span
++                            title="Face verified"
++                            className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500 text-white shadow-sm flex-shrink-0"
++                          >
++                            <Check size={14} strokeWidth={3} />
++                          </span>
++                        )}
++                      </div>
++                      {(profile.city || profile.country) && (
++                        <p className="mt-1.5 flex items-center gap-1 text-sm text-gray-500">
++                          <MapPin size={13} /> {[profile.city, profile.country].filter(Boolean).join(", ")}
++                        </p>
++                      )}
++                      <p className="mt-3 text-sm text-gray-500 leading-relaxed whitespace-pre-wrap italic">
++                        {profile.bio || <span className="text-gray-400">No bio yet ΓÇö click "Edit" to add one.</span>}
++                      </p>
++                      {heroChips.length > 0 && (
++                        <div className="mt-3 flex flex-wrap gap-2">
++                          {heroChips.map((c, i) => (
++                            <span
++                              key={`${c}-${i}`}
++                              className="text-xs font-medium px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200"
++                            >
++                              {c}
++                            </span>
++                          ))}
++                        </div>
++                      )}
++                      <p className="mt-3 text-sm text-gray-500 italic leading-relaxed">
++                        <span className="font-semibold not-italic text-gray-700">Ideal first date: </span>
++                        {profile.first_date_idea ? `"${profile.first_date_idea}"` : <span className="text-gray-400">Not set. Update this in the "About" section!</span>}
++                      </p>
++                    </>
++                  )}
++                </div>
++              </div>
++            </section>
++
++            {/* ΓöÇΓöÇ PHOTOS CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
++            <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6">
++              <div className="flex items-center justify-between mb-4">
++                <h3 className="font-bold text-gray-900 text-base">Photos</h3>
++                <div className="flex items-center gap-2">
++                  <button
++                    onClick={() => fileRef.current?.click()}
++                    disabled={uploading || images.length >= 6}
++                    title="Add photo"
++                    className="text-rose-500 hover:text-rose-600 disabled:opacity-40 text-xs font-semibold inline-flex items-center gap-1"
++                  >
++                    <Plus size={14} /> {uploading ? "UploadingΓÇª" : "Add"}
++                  </button>
++                </div>
++                <input
++                  ref={fileRef} type="file" accept="image/*" multiple className="hidden"
++                  onChange={(e) => { handleUpload(e.target.files); e.target.value = ""; }}
++                />
++              </div>
++              {images.length === 0 ? (
+@@ -3671,2 +3653 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                  className="absolute bottom-2 right-2 bg-white/95 text-gray-700 rounded-full p-1.5 shadow-md hover:bg-white transition"
+-                  title="Upload photo"
++                  className="w-full py-10 border-2 border-dashed border-rose-200 rounded-2xl flex flex-col items-center gap-2 text-gray-400 hover:border-rose-400 hover:text-rose-500 transition"
+@@ -3674 +3655 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                  <Camera size={14} />
++                  <Upload size={22} /> <span className="text-sm font-medium">Upload your first photo</span>
+@@ -3675,0 +3657,32 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
++              ) : (
++                // Horizontal scroll matches the reference carousel. `snap-start`
++                // keeps thumbnails aligned nicely as the user scrolls on touch.
++                <div className="flex gap-2.5 overflow-x-auto snap-x snap-mandatory pb-1 -mx-1 px-1">
++                  {images.map((img) => {
++                    const url = img.image_url || img.url;
++                    const isMain = img.is_main || url === profile.main_image_url;
++                    return (
++                      <div
++                        key={img.id}
++                        className="relative flex-shrink-0 snap-start w-36 h-28 sm:w-44 sm:h-36 md:w-52 md:h-40 rounded-xl overflow-hidden border border-gray-200 group bg-gray-100"
++                      >
++                        <img src={url} alt="" className="w-full h-full object-cover" />
++                        {isMain && (
++                          <div className="absolute top-1.5 left-1.5 bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow">MAIN</div>
++                        )}
++                        <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-1.5 transition">
++                          {!isMain && (
++                            <button onClick={() => handleSetMain(img.id)} title="Set as main"
++                              className="bg-white text-gray-800 rounded-full p-1.5 hover:bg-rose-500 hover:text-white transition">
++                              <Star size={13} />
++                            </button>
++                          )}
++                          <button onClick={() => handleDeleteImage(img.id)} title="Delete"
++                            className="bg-white text-gray-800 rounded-full p-1.5 hover:bg-red-500 hover:text-white transition">
++                            <Trash2 size={13} />
++                          </button>
++                        </div>
++                      </div>
++                    );
++                  })}
++                </div>
+@@ -3677 +3690 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-            </div>
++            </section>
+@@ -3679,2 +3692,3 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-            {/* Identity + bio + chips */}
+-            <div className="flex-1 min-w-0 pt-1 pr-20">
++            {/* ΓöÇΓöÇ ABOUT CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
++            <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6">
++              <h3 className="font-bold text-gray-900 text-base mb-5">About</h3>
+@@ -3682,36 +3696,28 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                <div className="space-y-2.5">
+-                  <div className="grid grid-cols-3 gap-2">
+-                    <input
+-                      value={form.name}
+-                      onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))}
+-                      placeholder="Name"
+-                      className="col-span-2 border border-gray-200 rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500"
+-                    />
+-                    <input
+-                      type="number"
+-                      value={form.age}
+-                      onChange={(e) => setForm(f => ({ ...f, age: e.target.value }))}
+-                      placeholder="Age"
+-                      className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+-                    />
+-                  </div>
+-                  <textarea
+-                    value={form.bio}
+-                    onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))}
+-                    rows={3}
+-                    maxLength={300}
+-                    placeholder="Tell people a bit about yourselfΓÇª"
+-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
+-                  />
+-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+-                    <input
+-                      value={form.vibes}
+-                      onChange={(e) => setForm(f => ({ ...f, vibes: e.target.value }))}
+-                      placeholder="Vibes: adventurous, romanticΓÇª"
+-                      className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+-                    />
+-                    <input
+-                      value={form.hobbies}
+-                      onChange={(e) => setForm(f => ({ ...f, hobbies: e.target.value }))}
+-                      placeholder="Hobbies: travel, musicΓÇª"
+-                      className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
++                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
++                  <EditField label="City" value={form.city} onChange={(v) => setForm(f => ({ ...f, city: v }))} />
++                  <EditField label="Country" value={form.country} onChange={(v) => setForm(f => ({ ...f, country: v }))} />
++                  <EditField label="Date of birth" type="date" value={form.date_of_birth} onChange={(v) => setForm(f => ({ ...f, date_of_birth: v }))} />
++                  <EditField label="Occupation" value={form.occupation} onChange={(v) => setForm(f => ({ ...f, occupation: v }))} />
++                  <EditField label="Workplace" value={form.workplace} onChange={(v) => setForm(f => ({ ...f, workplace: v }))} />
++                  <EditField label="College / University" value={form.college_university} onChange={(v) => setForm(f => ({ ...f, college_university: v }))} />
++                  <EditSelect label="Education" value={form.education_level} options={EDIT_EDUCATION} onChange={(v) => setForm(f => ({ ...f, education_level: v }))} />
++                  <MultiSelectDropdown label="Languages" options={LANGUAGE_OPTIONS} value={form.languages} onChange={(v) => setForm(f => ({ ...f, languages: v }))} />
++                  <EditReligion value={form.religion} onChange={(v) => setForm(f => ({ ...f, religion: v }))} />
++                  <EditField label="Height (cm)" type="number" value={form.height_cm} onChange={(v) => setForm(f => ({ ...f, height_cm: v }))} />
++                  <EditSelect label="Looking for" value={form.relationship_goal} options={EDIT_GOALS} onChange={(v) => setForm(f => ({ ...f, relationship_goal: v }))} />
++                  <EditSelect label="Relationship" value={form.relationship_status} options={EDIT_STATUS} onChange={(v) => setForm(f => ({ ...f, relationship_status: v }))} />
++                  <EditSelect label="Family plans" value={form.children} options={LIFESTYLE_OPTS.children.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, children: v }))} />
++                  <EditSelect label="Drink" value={form.drinking} options={LIFESTYLE_OPTS.drinking.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, drinking: v }))} />
++                  <EditSelect label="Smoke" value={form.smoking} options={LIFESTYLE_OPTS.smoking.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, smoking: v }))} />
++                  <EditSelect label="Workout" value={form.workout} options={LIFESTYLE_OPTS.workout.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, workout: v }))} />
++                  <EditSelect label="Diet" value={form.diet} options={LIFESTYLE_OPTS.diet.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, diet: v }))} />
++                  <EditSelect label="Pets" value={form.pets} options={LIFESTYLE_OPTS.pets.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, pets: v }))} />
++                  <div className="md:col-span-2">
++                    <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Ideal first date</label>
++                    <textarea
++                      value={form.first_date_idea}
++                      onChange={(e) => setForm(f => ({ ...f, first_date_idea: e.target.value }))}
++                      rows={2}
++                      maxLength={200}
++                      placeholder="Coffee and a long walk? A concert? Cooking together?"
++                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
+@@ -3722,13 +3728,5 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                <>
+-                  <div className="flex items-center gap-2 flex-wrap">
+-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+-                      {profile.name}{profile.age ? `, ${profile.age}` : ""}
+-                    </h2>
+-                    {profile.is_verified && (
+-                      <span
+-                        title="Face verified"
+-                        className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500 text-white shadow-sm"
+-                      >
+-                        <Check size={13} strokeWidth={3} />
+-                      </span>
+-                    )}
++                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 text-sm">
++                  <div>
++                    {aboutLeft.map(([label, value]) => (
++                      <AboutRow key={label} label={label} value={value} />
++                    ))}
+@@ -3736,86 +3734,4 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                  {(profile.city || profile.country) && (
+-                    <p className="mt-1 flex items-center gap-1 text-xs text-gray-500">
+-                      <MapPin size={12} /> {[profile.city, profile.country].filter(Boolean).join(", ")}
+-                    </p>
+-                  )}
+-                  <p className="mt-3 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+-                    {profile.bio || <span className="text-gray-400 italic">No bio yet ΓÇö click "Edit" to add one.</span>}
+-                  </p>
+-                  {heroChips.length > 0 && (
+-                    <div className="mt-3 flex flex-wrap gap-1.5">
+-                      {heroChips.map((c, i) => (
+-                        <span
+-                          key={`${c}-${i}`}
+-                          className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-100"
+-                        >
+-                          {c}
+-                        </span>
+-                      ))}
+-                    </div>
+-                  )}
+-                  {profile.first_date_idea && (
+-                    <p className="mt-3 text-xs text-gray-500 italic leading-relaxed">
+-                      <span className="font-semibold not-italic text-gray-600">Ideal first date: </span>
+-                      "{profile.first_date_idea}"
+-                    </p>
+-                  )}
+-                </>
+-              )}
+-            </div>
+-          </div>
+-        </section>
+-
+-        {/* ΓöÇΓöÇ PHOTOS CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+-        <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-4 md:p-5">
+-          <div className="flex items-center justify-between mb-3">
+-            <h3 className="font-bold text-gray-900 text-sm">Photos</h3>
+-            <div className="flex items-center gap-2">
+-              <button
+-                onClick={() => fileRef.current?.click()}
+-                disabled={uploading || images.length >= 6}
+-                title="Add photo"
+-                className="text-rose-500 hover:text-rose-600 disabled:opacity-40 text-xs font-semibold inline-flex items-center gap-1"
+-              >
+-                <Plus size={14} /> {uploading ? "UploadingΓÇª" : "Add"}
+-              </button>
+-            </div>
+-            <input
+-              ref={fileRef} type="file" accept="image/*" multiple className="hidden"
+-              onChange={(e) => { handleUpload(e.target.files); e.target.value = ""; }}
+-            />
+-          </div>
+-          {images.length === 0 ? (
+-            <button
+-              onClick={() => fileRef.current?.click()}
+-              className="w-full py-10 border-2 border-dashed border-rose-200 rounded-2xl flex flex-col items-center gap-2 text-gray-400 hover:border-rose-400 hover:text-rose-500 transition"
+-            >
+-              <Upload size={22} /> <span className="text-sm font-medium">Upload your first photo</span>
+-            </button>
+-          ) : (
+-            // Horizontal scroll matches the reference carousel. `snap-start`
+-            // keeps thumbnails aligned nicely as the user scrolls on touch.
+-            <div className="flex gap-2.5 overflow-x-auto snap-x snap-mandatory pb-1 -mx-1 px-1">
+-              {images.map((img) => {
+-                const url = img.image_url || img.url;
+-                const isMain = img.is_main || url === profile.main_image_url;
+-                return (
+-                  <div
+-                    key={img.id}
+-                    className="relative flex-shrink-0 snap-start w-32 h-24 sm:w-40 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden border border-gray-200 group bg-gray-100"
+-                  >
+-                    <img src={url} alt="" className="w-full h-full object-cover" />
+-                    {isMain && (
+-                      <div className="absolute top-1.5 left-1.5 bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow">MAIN</div>
+-                    )}
+-                    <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-1.5 transition">
+-                      {!isMain && (
+-                        <button onClick={() => handleSetMain(img.id)} title="Set as main"
+-                          className="bg-white text-gray-800 rounded-full p-1.5 hover:bg-rose-500 hover:text-white transition">
+-                          <Star size={13} />
+-                        </button>
+-                      )}
+-                      <button onClick={() => handleDeleteImage(img.id)} title="Delete"
+-                        className="bg-white text-gray-800 rounded-full p-1.5 hover:bg-red-500 hover:text-white transition">
+-                        <Trash2 size={13} />
+-                      </button>
+-                    </div>
++                  <div>
++                    {aboutRight.map(([label, value]) => (
++                      <AboutRow key={label} label={label} value={value} />
++                    ))}
+@@ -3823,5 +3739,3 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-                );
+-              })}
+-            </div>
+-          )}
+-        </section>
++                </div>
++              )}
++            </section>
+@@ -3829,48 +3743,2 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        {/* ΓöÇΓöÇ ABOUT CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+-        <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-4 md:p-5">
+-          <h3 className="font-bold text-gray-900 text-sm mb-4">About</h3>
+-          {editing ? (
+-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+-              <EditField label="City" value={form.city} onChange={(v) => setForm(f => ({ ...f, city: v }))} />
+-              <EditField label="Country" value={form.country} onChange={(v) => setForm(f => ({ ...f, country: v }))} />
+-              <EditField label="Date of birth" type="date" value={form.date_of_birth} onChange={(v) => setForm(f => ({ ...f, date_of_birth: v }))} />
+-              <EditField label="Occupation" value={form.occupation} onChange={(v) => setForm(f => ({ ...f, occupation: v }))} />
+-              <EditSelect label="Education" value={form.education_level} options={EDIT_EDUCATION} onChange={(v) => setForm(f => ({ ...f, education_level: v }))} />
+-              <EditField label="Languages (comma-separated)" value={form.languages} onChange={(v) => setForm(f => ({ ...f, languages: v }))} />
+-              <EditReligion value={form.religion} onChange={(v) => setForm(f => ({ ...f, religion: v }))} />
+-              <EditField label="Height (cm)" type="number" value={form.height_cm} onChange={(v) => setForm(f => ({ ...f, height_cm: v }))} />
+-              <EditSelect label="Looking for" value={form.relationship_goal} options={EDIT_GOALS} onChange={(v) => setForm(f => ({ ...f, relationship_goal: v }))} />
+-              <EditSelect label="Relationship" value={form.relationship_status} options={EDIT_STATUS} onChange={(v) => setForm(f => ({ ...f, relationship_status: v }))} />
+-              <EditSelect label="Family plans" value={form.children} options={LIFESTYLE_OPTS.children.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, children: v }))} />
+-              <EditSelect label="Drink" value={form.drinking} options={LIFESTYLE_OPTS.drinking.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, drinking: v }))} />
+-              <EditSelect label="Smoke" value={form.smoking} options={LIFESTYLE_OPTS.smoking.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, smoking: v }))} />
+-              <EditSelect label="Workout" value={form.workout} options={LIFESTYLE_OPTS.workout.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, workout: v }))} />
+-              <EditSelect label="Diet" value={form.diet} options={LIFESTYLE_OPTS.diet.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, diet: v }))} />
+-              <EditSelect label="Pets" value={form.pets} options={LIFESTYLE_OPTS.pets.map(o => ({ value: o.value, label: o.label }))} onChange={(v) => setForm(f => ({ ...f, pets: v }))} />
+-              <div className="md:col-span-2">
+-                <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Ideal first date</label>
+-                <textarea
+-                  value={form.first_date_idea}
+-                  onChange={(e) => setForm(f => ({ ...f, first_date_idea: e.target.value }))}
+-                  rows={2}
+-                  maxLength={200}
+-                  placeholder="Coffee and a long walk? A concert? Cooking together?"
+-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
+-                />
+-              </div>
+-            </div>
+-          ) : (
+-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-2.5 text-sm">
+-              <div className="space-y-2.5">
+-                {aboutLeft.map(([label, value]) => (
+-                  <AboutRow key={label} label={label} value={value} />
+-                ))}
+-              </div>
+-              <div className="space-y-2.5">
+-                {aboutRight.map(([label, value]) => (
+-                  <AboutRow key={label} label={label} value={value} />
+-                ))}
+-              </div>
+-            </div>
+-          )}
+-        </section>
++            {/* ΓöÇΓöÇ APPEARANCE SETTINGS CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
++            <AppearanceCard />
+@@ -3878,7 +3746,7 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-        {/* ΓöÇΓöÇ COMPATIBILITY / CONNECTION STYLE CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+-        <CompatibilitySection
+-          profile={profile}
+-          onSaved={(updatedAnswers) => {
+-            onRefresh();
+-          }}
+-        />
++            {/* ΓöÇΓöÇ COMPATIBILITY / CONNECTION STYLE CARD ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
++            <CompatibilitySection
++              profile={profile}
++              onSaved={(updatedAnswers) => {
++                onRefresh();
++              }}
++            />
+@@ -3890 +3758 @@ function ProfileView({ profile, onRefresh, showToast, conversations = [], setVie
+-          <aside className="space-y-4 md:space-y-5 lg:sticky lg:top-4">
++          <aside className="lg:pl-4 space-y-5 md:space-y-6 lg:sticky lg:top-4">
+@@ -3930,3 +3798,3 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-    <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-4 md:p-5">
+-      <div className="flex items-center justify-between mb-3">
+-        <h3 className="font-bold text-gray-900 text-sm">Messages</h3>
++    <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6">
++      <div className="flex items-center justify-between mb-4">
++        <h3 className="font-bold text-gray-900 text-base">Messages</h3>
+@@ -3935 +3803 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-          className="text-[11px] font-semibold text-rose-500 hover:text-rose-600 transition"
++          className="text-xs font-semibold text-rose-500 hover:text-rose-600 transition"
+@@ -3941 +3809 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-      <div className="grid grid-cols-2 gap-1 p-1 bg-rose-50/70 rounded-xl mb-3">
++      <div className="grid grid-cols-2 gap-1.5 p-1.5 bg-rose-50/70 rounded-xl mb-4">
+@@ -3944,5 +3812,4 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-          className={`text-xs font-semibold py-1.5 rounded-lg transition ${
+-            tab === "chats"
+-              ? "bg-white text-rose-600 shadow-sm"
+-              : "text-gray-500 hover:text-gray-700"
+-          }`}
++          className={`text-sm font-semibold py-2 rounded-lg transition ${tab === "chats"
++            ? "bg-white text-rose-600 shadow-sm"
++            : "text-gray-500 hover:text-gray-700"
++            }`}
+@@ -3954,5 +3821,4 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-          className={`text-xs font-semibold py-1.5 rounded-lg transition ${
+-            tab === "requests"
+-              ? "bg-white text-rose-600 shadow-sm"
+-              : "text-gray-500 hover:text-gray-700"
+-          }`}
++          className={`text-sm font-semibold py-2 rounded-lg transition ${tab === "requests"
++            ? "bg-white text-rose-600 shadow-sm"
++            : "text-gray-500 hover:text-gray-700"
++            }`}
+@@ -3965,4 +3831,4 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-        <div className="py-8 text-center">
+-          <MessageCircle size={28} className="text-gray-200 mx-auto mb-2" />
+-          <p className="text-xs font-semibold text-gray-500">No conversations yet</p>
+-          <p className="text-[11px] text-gray-400 mt-0.5">
++        <div className="py-10 text-center">
++          <MessageCircle size={32} className="text-gray-200 mx-auto mb-3" />
++          <p className="text-sm font-semibold text-gray-500">No conversations yet</p>
++          <p className="text-xs text-gray-400 mt-1">
+@@ -3973 +3839 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-        <ul className="space-y-0.5 -mx-1">
++        <ul className="space-y-1 -mx-1">
+@@ -3979,4 +3845,4 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-              ? last.sender_id === userId
+-                ? `You: ${last.content}`
+-                : last.content
+-              : "Matched! Say hello ≡ƒæï";
++                ? last.sender_id === userId
++                  ? `You: ${last.content}`
++                  : last.content
++                : "Matched! Say hello ≡ƒæï";
+@@ -3987 +3853 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                  className="w-full flex items-center gap-3 px-2 py-2 rounded-xl hover:bg-rose-50/60 transition text-left"
++                  className="w-full flex items-center gap-3 px-2.5 py-2.5 rounded-xl hover:bg-rose-50/60 transition text-left"
+@@ -3993 +3859 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                      className={`w-9 h-9 rounded-full object-cover ${c.removed_at ? "grayscale" : ""}`}
++                      className={`w-11 h-11 rounded-full object-cover ${c.removed_at ? "grayscale" : ""}`}
+@@ -3996 +3862 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                      <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-white" />
++                      <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white" />
+@@ -4001 +3867 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                      <p className="text-[13px] font-semibold text-gray-800 truncate">
++                      <p className="text-sm font-semibold text-gray-800 truncate">
+@@ -4004 +3870 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                      <span className="text-[10px] text-gray-400 flex-shrink-0">
++                      <span className="text-[11px] text-gray-400 flex-shrink-0">
+@@ -4009 +3875 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                      <p className="text-[11px] text-gray-500 truncate">
++                      <p className="text-xs text-gray-500 truncate">
+@@ -4013 +3879 @@ function MessagesSummaryCard({ conversations, userId, setView }) {
+-                        <span className="flex-shrink-0 bg-rose-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
++                        <span className="flex-shrink-0 bg-rose-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+@@ -4047,2 +3913,2 @@ function ContactsOnlineCard({ conversations, setView }) {
+-    <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-4 md:p-5">
+-      <h3 className="font-bold text-gray-900 text-sm mb-3">My contacts online</h3>
++    <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6">
++      <h3 className="font-bold text-gray-900 text-base mb-4">My contacts online</h3>
+@@ -4050,4 +3916,4 @@ function ContactsOnlineCard({ conversations, setView }) {
+-        <div className="py-6 text-center">
+-          <Heart size={24} className="text-gray-200 mx-auto mb-2" />
+-          <p className="text-xs font-semibold text-gray-500">No contacts yet</p>
+-          <p className="text-[11px] text-gray-400 mt-0.5">
++        <div className="py-8 text-center">
++          <Heart size={28} className="text-gray-200 mx-auto mb-3" />
++          <p className="text-sm font-semibold text-gray-500">No contacts yet</p>
++          <p className="text-xs text-gray-400 mt-1">
+@@ -4058 +3924 @@ function ContactsOnlineCard({ conversations, setView }) {
+-        <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
++        <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+@@ -4065 +3931 @@ function ContactsOnlineCard({ conversations, setView }) {
+-                className="flex flex-col items-center gap-1.5 group"
++                className="flex flex-col items-center gap-2 group"
+@@ -4072 +3938 @@ function ContactsOnlineCard({ conversations, setView }) {
+-                    className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-sm group-hover:ring-2 group-hover:ring-rose-300 transition"
++                    className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm group-hover:ring-2 group-hover:ring-rose-300 transition"
+@@ -4074 +3940 @@ function ContactsOnlineCard({ conversations, setView }) {
+-                  <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-white" />
++                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white" />
+@@ -4076 +3942 @@ function ContactsOnlineCard({ conversations, setView }) {
+-                <span className="text-[11px] font-medium text-gray-700 truncate max-w-full">
++                <span className="text-xs font-medium text-gray-700 truncate max-w-full">
+@@ -4093,3 +3959,3 @@ function AboutRow({ label, value }) {
+-    <div className="flex items-baseline gap-3">
+-      <span className="text-gray-400 font-medium w-28 flex-shrink-0">{label}:</span>
+-      <span className="text-gray-800 font-medium truncate">
++    <div className="flex items-center gap-4 py-2.5 border-b border-gray-50 last:border-0">
++      <span className="text-gray-400 text-sm font-medium w-28 flex-shrink-0">{label}:</span>
++      <span className="text-gray-800 text-sm font-semibold">
+@@ -4101,0 +3968,45 @@ function AboutRow({ label, value }) {
++// ΓöÇΓöÇΓöÇ Appearance Settings Card ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
++// Dark-mode toggle placed in the ProfileView. Uses the ThemeContext to flip
++// the `.dark` class on <html>; CSS overrides in index.css handle the rest.
++function AppearanceCard() {
++  const { darkMode, toggleDarkMode } = useTheme();
++
++  return (
++    <section className="bg-white rounded-3xl shadow-sm border border-rose-100/60 p-5 md:p-6">
++      <div className="flex items-center gap-2.5 mb-5">
++        <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-sm">
++          {darkMode ? <Moon size={14} /> : <Sun size={14} />}
++        </span>
++        <h3 className="font-bold text-gray-900 tracking-tight">Appearance</h3>
++      </div>
++
++      <div className="flex items-center justify-between gap-4">
++        <div className="min-w-0">
++          <p className="text-sm font-semibold text-gray-800">
++            {darkMode ? "Dark Mode" : "Light Mode"}
++          </p>
++          <p className="text-xs text-gray-500 mt-0.5">
++            {darkMode
++              ? "Switch to light theme for a brighter look"
++              : "Switch to dark theme for a comfortable nighttime experience"}
++          </p>
++        </div>
++
++        {/* Custom animated toggle switch */}
++        <button
++          onClick={toggleDarkMode}
++          className={`dark-toggle-track ${darkMode ? "active" : ""}`}
++          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
++          role="switch"
++          aria-checked={darkMode}
++        >
++          <span className="dark-toggle-knob">
++            {darkMode
++              ? <Moon size={12} className="text-purple-500" />
++              : <Sun size={12} className="text-amber-500" />}
++          </span>
++        </button>
++      </div>
++    </section>
++  );
++}
+@@ -4212 +4123 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-    api.subscriptions.me().then(setSub).catch(() => {});
++    api.subscriptions.me().then(setSub).catch(() => { });
+@@ -4222,5 +4133,5 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-    { id: "discover",  Icon: Home,          label: "Discover"  },
+-    { id: "messages",  Icon: MessageCircle, label: "Messages",  badge: unreadCount },
+-    { id: "likes",     Icon: Heart,         label: "Likes"     },
+-    { id: "wallet",    Icon: Wallet,        label: "Wallet"    },
+-    { id: "profile",   Icon: User,          label: "My Profile" },
++    { id: "discover", Icon: Home, label: "Discover" },
++    { id: "messages", Icon: MessageCircle, label: "Messages", badge: unreadCount },
++    { id: "likes", Icon: Heart, label: "Likes" },
++    { id: "wallet", Icon: Wallet, label: "Wallet" },
++    { id: "profile", Icon: User, label: "My Profile" },
+@@ -4233,0 +4145 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
++  // "revealed" = visible; "hidden-label" = collapsed.
+@@ -4235,3 +4147,3 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-    "whitespace-nowrap transition-opacity duration-200 " +
+-    "md:opacity-0 md:group-hover:opacity-100 " +
+-    "opacity-100";
++    "whitespace-nowrap transition-all duration-200 overflow-hidden " +
++    "md:max-w-0 md:opacity-0 md:ml-0 md:group-hover:max-w-[200px] md:group-hover:opacity-100 md:group-hover:ml-3 " +
++    "max-w-[200px] opacity-100 ml-3";
+@@ -4260 +4172 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-        <div className="flex items-center gap-2.5 px-4 py-5 border-b border-gray-100 flex-shrink-0">
++        <div className="flex items-center md:justify-center md:group-hover:justify-start px-4 py-5 border-b border-gray-100 flex-shrink-0">
+@@ -4276 +4188 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-        <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-hidden">
++        <nav className="flex-1 py-4 px-2 md:px-2 space-y-1 overflow-hidden">
+@@ -4282,5 +4194,4 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+-                view === id
+-                  ? "bg-pink-50 text-pink-600"
+-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+-              }`}
++              className={`w-full flex items-center md:justify-center md:group-hover:justify-start px-3 py-3 rounded-xl text-sm font-medium transition-all ${view === id
++                ? "bg-pink-50 text-pink-600"
++                : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
++                }`}
+@@ -4288 +4199 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-              <Icon size={18} className={`flex-shrink-0 ${view === id ? "text-pink-500" : "text-gray-400"}`} />
++              <Icon size={20} className={`flex-shrink-0 ${view === id ? "text-pink-500" : "text-gray-400"}`} />
+@@ -4291 +4202 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-                <span className={`ml-auto bg-pink-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${labelCls}`}>
++                <span className={`ml-auto mr-1 bg-pink-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity md:opacity-0 md:group-hover:opacity-100 opacity-100`}>
+@@ -4301 +4212 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-500 transition-all mt-2"
++            className="w-full flex items-center md:justify-center md:group-hover:justify-start px-3 py-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-500 transition-all mt-2"
+@@ -4303 +4214 @@ function Sidebar({ profile, view, setView, unreadCount, onLogout, mobileOpen, cl
+-            <LogOut size={18} className="text-gray-400 flex-shrink-0" />
++            <LogOut size={20} className="text-gray-400 flex-shrink-0" />
+@@ -4497,5 +4408,5 @@ function NotificationBell({
+-      case "match_invitation":    return `${who} wants to reconnect`;
+-      case "match_restored":      return `${who} is your friend again ≡ƒÆò`;
+-      case "match_created":       return `You matched with ${who} ≡ƒÄë`;
+-      case "like_received":       return `${who} liked you Γ¥ñ∩╕Å`;
+-      case "gift_like":           return `${who} super liked you ≡ƒÄü`;
++      case "match_invitation": return `${who} wants to reconnect`;
++      case "match_restored": return `${who} is your friend again ≡ƒÆò`;
++      case "match_created": return `You matched with ${who} ≡ƒÄë`;
++      case "like_received": return `${who} liked you Γ¥ñ∩╕Å`;
++      case "gift_like": return `${who} super liked you ≡ƒÄü`;
+@@ -4510 +4421 @@ function NotificationBell({
+-    if (s < 60)   return `${s}s`;
++    if (s < 60) return `${s}s`;
+@@ -4612,4 +4523,4 @@ function NotificationBell({
+-              const isGift   = n.type === "gift_like";
+-              const isLike   = n.type === "like_received" || isGift;
+-              const giftMsg  = isGift ? n.payload?.message : null;
+-              const handled  = n.is_handled;
++              const isGift = n.type === "gift_like";
++              const isLike = n.type === "like_received" || isGift;
++              const giftMsg = isGift ? n.payload?.message : null;
++              const handled = n.is_handled;
+@@ -4620,5 +4531,4 @@ function NotificationBell({
+-                  className={`flex items-start gap-3 px-4 py-3 transition cursor-default ${
+-                    isGift
+-                      ? n.is_read ? "bg-amber-50/60" : "bg-amber-50"
+-                      : n.is_read ? "hover:bg-gray-50" : "bg-pink-50/30 hover:bg-pink-50/60"
+-                  }`}
++                  className={`flex items-start gap-3 px-4 py-3 transition cursor-default ${isGift
++                    ? n.is_read ? "bg-amber-50/60" : "bg-amber-50"
++                    : n.is_read ? "hover:bg-gray-50" : "bg-pink-50/30 hover:bg-pink-50/60"
++                    }`}
+@@ -4724 +4634 @@ function VerifyFaceModal({ onClose, onDone, showToast, gated = false }) {
+-          await videoRef.current.play().catch(() => {});
++          await videoRef.current.play().catch(() => { });
+@@ -4788 +4698 @@ function VerifyFaceModal({ onClose, onDone, showToast, gated = false }) {
+-  const closeIfAllowed = gated ? () => {} : onClose;
++  const closeIfAllowed = gated ? () => { } : onClose;
+@@ -5064 +4974 @@ export default function Dashboard() {
+-        kind:    e?.detail?.kind    || "upgrade",
++        kind: e?.detail?.kind || "upgrade",
+@@ -5096 +5006,2 @@ export default function Dashboard() {
+-        const updated = { ...prev[idx],
++        const updated = {
++          ...prev[idx],
+@@ -5200,2 +5111 @@ export default function Dashboard() {
+-          {/* Mobile: full-width capped at sm. Desktop: much larger poster */}
+-          <div className="relative w-full max-w-sm md:max-w-xl lg:max-w-2xl rounded-2xl overflow-hidden shadow-2xl">
++          <div className="relative max-w-sm w-full rounded-2xl overflow-hidden shadow-2xl">
+@@ -5205 +5115 @@ export default function Dashboard() {
+-              className="absolute top-3 right-3 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition-colors"
++              className="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition-colors"
+@@ -5207 +5117 @@ export default function Dashboard() {
+-              <X className="w-5 h-5" />
++              <X className="w-4 h-4" />
+@@ -5209 +5119 @@ export default function Dashboard() {
+-            {/* Poster ΓÇö max-h prevents very tall images from overflowing the viewport */}
++            {/* Poster */}
+@@ -5213 +5123 @@ export default function Dashboard() {
+-              className="w-full block cursor-pointer max-h-[88vh] object-contain bg-black"
++              className="w-full block cursor-pointer"
+@@ -5236 +5146 @@ export default function Dashboard() {
+-        <header className="bg-white border-b border-gray-100 px-4 md:px-6 h-14 flex items-center justify-between flex-shrink-0 gap-3">
++        <header className="bg-white border-b border-gray-100 px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between flex-shrink-0 gap-3">
+@@ -5245 +5155 @@ export default function Dashboard() {
+-            <h1 className="font-bold text-gray-800 capitalize truncate text-sm md:text-base">
++            <h1 className="font-bold text-gray-800 capitalize truncate text-lg">
+@@ -5317 +5227 @@ export default function Dashboard() {
+-              <span className="text-sm text-gray-500 hidden md:block">
++              <span className="text-sm text-gray-500 hidden md:flex items-center gap-1.5 mr-1">
+@@ -5329,2 +5239,2 @@ export default function Dashboard() {
+-          {view === "discover"  && <DiscoverView  showToast={showToast} onMatch={p => setMatchModal(p)} profile={profile} />}
+-          {view === "messages"  && <MessagesView  showToast={showToast} userId={userId}
++          {view === "discover" && <DiscoverView showToast={showToast} onMatch={p => setMatchModal(p)} profile={profile} />}
++          {view === "messages" && <MessagesView showToast={showToast} userId={userId}
+@@ -5341 +5251 @@ export default function Dashboard() {
+-                  self_name:  profile?.name || "Someone",
++                  self_name: profile?.name || "Someone",
+@@ -5347,3 +5257,3 @@ export default function Dashboard() {
+-          {view === "likes"     && <LikesView     showToast={showToast} />}
+-          {view === "wallet"    && <WalletView    profile={profile} showToast={showToast} />}
+-          {view === "profile"   && <ProfileView   profile={profile} onRefresh={refreshProfile} showToast={showToast} conversations={conversations} setView={setView} userId={userId} />}
++          {view === "likes" && <LikesView showToast={showToast} />}
++          {view === "wallet" && <WalletView profile={profile} showToast={showToast} />}
++          {view === "profile" && <ProfileView profile={profile} onRefresh={refreshProfile} showToast={showToast} conversations={conversations} setView={setView} userId={userId} />}
+@@ -5425,4 +5335,4 @@ function WalletView({ profile, showToast }) {
+-      withTimeout(api.wallet.balance(),          6000, { balance: 0, lifetime_earned: 0, lifetime_spent: 0, signup_bonus_granted: false }),
+-      withTimeout(api.wallet.packs(),            6000, []),
+-      withTimeout(api.wallet.config(),           6000, { is_mock: true, key_id: "mock" }),
+-      withTimeout(api.wallet.transactions(),     6000, []),
++      withTimeout(api.wallet.balance(), 6000, { balance: 0, lifetime_earned: 0, lifetime_spent: 0, signup_bonus_granted: false }),
++      withTimeout(api.wallet.packs(), 6000, []),
++      withTimeout(api.wallet.config(), 6000, { is_mock: true, key_id: "mock" }),
++      withTimeout(api.wallet.transactions(), 6000, []),
+@@ -5430,2 +5340,2 @@ function WalletView({ profile, showToast }) {
+-      withTimeout(api.wallet.withdrawals(),      6000, []),
+-      withTimeout(api.wallet.getBillingDetails(),6000, null),
++      withTimeout(api.wallet.withdrawals(), 6000, []),
++      withTimeout(api.wallet.getBillingDetails(), 6000, null),
+@@ -5492,2 +5402,2 @@ function WalletView({ profile, showToast }) {
+-        name:    billingDetails.name,
+-        email:   billingDetails.email,
++        name: billingDetails.name,
++        email: billingDetails.email,
+@@ -5496,2 +5406,2 @@ function WalletView({ profile, showToast }) {
+-        name:    profile?.name  || "",
+-        email:   profile?.email || "",
++        name: profile?.name || "",
++        email: profile?.email || "",
+@@ -5501,4 +5411,4 @@ function WalletView({ profile, showToast }) {
+-        key:         order.key_id,
+-        amount:      order.amount_paise,
+-        currency:    order.currency,
+-        name:        "MatchInMinutes",
++        key: order.key_id,
++        amount: order.amount_paise,
++        currency: order.currency,
++        name: "MatchInMinutes",
+@@ -5506 +5416 @@ function WalletView({ profile, showToast }) {
+-        order_id:    order.order_id,
++        order_id: order.order_id,
+@@ -5513 +5423 @@ function WalletView({ profile, showToast }) {
+-              order_id:   resp.razorpay_order_id,
++              order_id: resp.razorpay_order_id,
+@@ -5515 +5425 @@ function WalletView({ profile, showToast }) {
+-              signature:  resp.razorpay_signature,
++              signature: resp.razorpay_signature,
+@@ -5575,5 +5485,5 @@ function WalletView({ profile, showToast }) {
+-    { credits: 50,   inr_paise: 5000,   inr: 50,   discount_pct: 0 },
+-    { credits: 100,  inr_paise: 9500,   inr: 95,   discount_pct: 5 },
+-    { credits: 200,  inr_paise: 18000,  inr: 180,  discount_pct: 10 },
+-    { credits: 500,  inr_paise: 40000,  inr: 400,  discount_pct: 20 },
+-    { credits: 1000, inr_paise: 75000,  inr: 750,  discount_pct: 25 },
++    { credits: 50, inr_paise: 5000, inr: 50, discount_pct: 0 },
++    { credits: 100, inr_paise: 9500, inr: 95, discount_pct: 5 },
++    { credits: 200, inr_paise: 18000, inr: 180, discount_pct: 10 },
++    { credits: 500, inr_paise: 40000, inr: 400, discount_pct: 20 },
++    { credits: 1000, inr_paise: 75000, inr: 750, discount_pct: 25 },
+@@ -5662 +5572 @@ function WalletView({ profile, showToast }) {
+-              <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a4 4 0 00-4 4v2H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V6a4 4 0 00-4-4zm2 6H8V6a2 2 0 114 0v2z"/></svg>
++              <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a4 4 0 00-4 4v2H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V6a4 4 0 00-4-4zm2 6H8V6a2 2 0 114 0v2z" /></svg>
+@@ -5676,5 +5586,4 @@ function WalletView({ profile, showToast }) {
+-                  className={`group relative rounded-2xl p-5 text-left transition disabled:opacity-60 disabled:cursor-not-allowed ${
+-                    isFeatured
+-                      ? "bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-300 hover:border-rose-400 shadow-sm hover:shadow-lg"
+-                      : "bg-white border border-gray-200 hover:border-rose-300 hover:shadow-md"
+-                  }`}
++                  className={`group relative rounded-2xl p-5 text-left transition disabled:opacity-60 disabled:cursor-not-allowed ${isFeatured
++                    ? "bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-300 hover:border-rose-400 shadow-sm hover:shadow-lg"
++                    : "bg-white border border-gray-200 hover:border-rose-300 hover:shadow-md"
++                    }`}
+@@ -5718,5 +5627,4 @@ function WalletView({ profile, showToast }) {
+-                  <div className={`mt-4 inline-flex items-center justify-center w-full gap-1.5 py-2 rounded-lg text-xs font-bold transition ${
+-                    isFeatured
+-                      ? "bg-rose-500 text-white group-hover:bg-rose-600"
+-                      : "bg-gray-50 text-gray-700 group-hover:bg-rose-500 group-hover:text-white"
+-                  }`}>
++                  <div className={`mt-4 inline-flex items-center justify-center w-full gap-1.5 py-2 rounded-lg text-xs font-bold transition ${isFeatured
++                    ? "bg-rose-500 text-white group-hover:bg-rose-600"
++                    : "bg-gray-50 text-gray-700 group-hover:bg-rose-500 group-hover:text-white"
++                    }`}>
+@@ -5924,8 +5832,8 @@ const TX_KIND_META = {
+-  purchase:          { label: "Credits purchased",    icon: ArrowDownCircle, bg: "bg-emerald-50", fg: "text-emerald-600" },
+-  signup_bonus:      { label: "Welcome bonus",        icon: Sparkles,        bg: "bg-amber-50",   fg: "text-amber-600" },
+-  gift_sent:         { label: "Gift sent",            icon: Gift,            bg: "bg-rose-50",    fg: "text-rose-600" },
+-  gift_received:     { label: "Gift received",        icon: Gift,            bg: "bg-pink-50",    fg: "text-pink-600" },
+-  gift_refund:       { label: "Gift refund",          icon: Gift,            bg: "bg-gray-50",    fg: "text-gray-600" },
+-  withdrawal_hold:   { label: "Withdrawal requested", icon: ArrowUpCircle,   bg: "bg-blue-50",    fg: "text-blue-600" },
+-  withdrawal_refund: { label: "Withdrawal refunded",  icon: ArrowDownCircle, bg: "bg-gray-50",    fg: "text-gray-600" },
+-  admin_adjust:      { label: "Admin adjustment",     icon: Coins,           bg: "bg-gray-50",    fg: "text-gray-600" },
++  purchase: { label: "Credits purchased", icon: ArrowDownCircle, bg: "bg-emerald-50", fg: "text-emerald-600" },
++  signup_bonus: { label: "Welcome bonus", icon: Sparkles, bg: "bg-amber-50", fg: "text-amber-600" },
++  gift_sent: { label: "Gift sent", icon: Gift, bg: "bg-rose-50", fg: "text-rose-600" },
++  gift_received: { label: "Gift received", icon: Gift, bg: "bg-pink-50", fg: "text-pink-600" },
++  gift_refund: { label: "Gift refund", icon: Gift, bg: "bg-gray-50", fg: "text-gray-600" },
++  withdrawal_hold: { label: "Withdrawal requested", icon: ArrowUpCircle, bg: "bg-blue-50", fg: "text-blue-600" },
++  withdrawal_refund: { label: "Withdrawal refunded", icon: ArrowDownCircle, bg: "bg-gray-50", fg: "text-gray-600" },
++  admin_adjust: { label: "Admin adjustment", icon: Coins, bg: "bg-gray-50", fg: "text-gray-600" },
+@@ -5950 +5858 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-  const [plans, setPlans]       = useState(null);
++  const [plans, setPlans] = useState(null);
+@@ -5955 +5863 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-    pro:  "pro_quarterly",
++    pro: "pro_quarterly",
+@@ -5958,2 +5866,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-  const [buying, setBuying]     = useState(false);
+-  const [billing, setBilling]   = useState(null);
++  const [buying, setBuying] = useState(false);
++  const [billing, setBilling] = useState(null);
+@@ -5961 +5869 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-  const [config, setConfig]     = useState(null);
++  const [config, setConfig] = useState(null);
+@@ -5995,2 +5903,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-      kind:        "subscription",
+-      slug:        selected,
++      kind: "subscription",
++      slug: selected,
+@@ -5998 +5906 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-      amount_inr:  activePlan?.total_inr,
++      amount_inr: activePlan?.total_inr,
+@@ -6005 +5913 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-          order_id:   order.order_id,
++          order_id: order.order_id,
+@@ -6007,2 +5915,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-          signature:  "mock",
+-          plan:       selected,
++          signature: "mock",
++          plan: selected,
+@@ -6026,2 +5934,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-        name:    billing.name,
+-        email:   billing.email,
++        name: billing.name,
++        email: billing.email,
+@@ -6030 +5938 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-        name:  profile?.name  || "",
++        name: profile?.name || "",
+@@ -6035,4 +5943,4 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-        key:         order.key_id,
+-        amount:      order.amount_paise,
+-        currency:    order.currency,
+-        name:        `MatchInMinutes ${tier === "pro" ? "Pro" : "Plus"}`,
++        key: order.key_id,
++        amount: order.amount_paise,
++        currency: order.currency,
++        name: `MatchInMinutes ${tier === "pro" ? "Pro" : "Plus"}`,
+@@ -6040 +5948 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-        order_id:    order.order_id,
++        order_id: order.order_id,
+@@ -6042 +5950 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-        theme:       { color: tier === "pro" ? "#d97706" : "#e11d48" },
++        theme: { color: tier === "pro" ? "#d97706" : "#e11d48" },
+@@ -6046 +5954 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-              order_id:   resp.razorpay_order_id,
++              order_id: resp.razorpay_order_id,
+@@ -6048,2 +5956,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-              signature:  resp.razorpay_signature,
+-              plan:       selected,
++              signature: resp.razorpay_signature,
++              plan: selected,
+@@ -6076 +5984 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-          code:   r?.error?.code,
++          code: r?.error?.code,
+@@ -6094,5 +6002,5 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-    trigger === "calls"         ? "Call your matches"
+-    : trigger === "heart"       ? "Free trial ended ≡ƒÆö"
+-    : trigger === "pass"        ? "Free trial ended ≡ƒÿò"
+-    : trigger === "instant_match" ? "Instant Match limit reached ΓÜí"
+-    : "Upgrade your experience";
++    trigger === "calls" ? "Call your matches"
++      : trigger === "heart" ? "Free trial ended ≡ƒÆö"
++        : trigger === "pass" ? "Free trial ended ≡ƒÿò"
++          : trigger === "instant_match" ? "Instant Match limit reached ΓÜí"
++            : "Upgrade your experience";
+@@ -6101,5 +6009,5 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-    trigger === "calls"         ? "Voice & video calls are a Pro feature. Upgrade to start calling your matches."
+-    : trigger === "heart"       ? "You've used all your free likes. Upgrade to Plus for unlimited likes and never miss a match."
+-    : trigger === "pass"        ? "You've used all your free passes. Upgrade to Plus to swipe without limits."
+-    : trigger === "instant_match" ? "You've used your 2 free Instant Matches today. Upgrade to Pro for unlimited real-time connections."
+-    : "Unlock unlimited swipes ΓÇö or go Pro for calls on top.";
++    trigger === "calls" ? "Voice & video calls are a Pro feature. Upgrade to start calling your matches."
++      : trigger === "heart" ? "You've used all your free likes. Upgrade to Plus for unlimited likes and never miss a match."
++        : trigger === "pass" ? "You've used all your free passes. Upgrade to Plus to swipe without limits."
++          : trigger === "instant_match" ? "You've used your 2 free Instant Matches today. Upgrade to Pro for unlimited real-time connections."
++            : "Unlock unlimited swipes ΓÇö or go Pro for calls on top.";
+@@ -6137,3 +6045,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                className={`flex-1 py-2 rounded-xl text-sm font-bold transition relative ${
+-                  !isPro ? "bg-white shadow text-gray-900" : "text-gray-500"
+-                }`}
++                className={`flex-1 py-2 rounded-xl text-sm font-bold transition relative ${!isPro ? "bg-white shadow text-gray-900" : "text-gray-500"
++                  }`}
+@@ -6146,3 +6053,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                className={`flex-1 py-2 rounded-xl text-sm font-bold transition relative ${
+-                  isPro ? "bg-white shadow text-amber-700" : "text-gray-500"
+-                }`}
++                className={`flex-1 py-2 rounded-xl text-sm font-bold transition relative ${isPro ? "bg-white shadow text-amber-700" : "text-gray-500"
++                  }`}
+@@ -6177,3 +6083,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                      className={`relative rounded-2xl p-4 text-left transition border-2 ${
+-                        isActive ? `${borderActive} shadow-sm` : borderHover
+-                      }`}
++                      className={`relative rounded-2xl p-4 text-left transition border-2 ${isActive ? `${borderActive} shadow-sm` : borderHover
++                        }`}
+@@ -6182,3 +6087,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                        <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow uppercase tracking-wider whitespace-nowrap bg-gradient-to-r ${
+-                          isPro ? "from-amber-400 to-orange-500" : "from-amber-400 to-rose-500"
+-                        }`}>
++                        <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow uppercase tracking-wider whitespace-nowrap bg-gradient-to-r ${isPro ? "from-amber-400 to-orange-500" : "from-amber-400 to-rose-500"
++                          }`}>
+@@ -6194,3 +6098,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                        <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${
+-                          isActive ? dotActive : "border-gray-300"
+-                        }`}>
++                        <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${isActive ? dotActive : "border-gray-300"
++                          }`}>
+@@ -6225,5 +6128,5 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                    "Unlimited voice & video calls with your matches",
+-                    "Everything in Plus ΓÇö unlimited hearts + passes",
+-                    "Priority support",
+-                    "Cancel anytime, no auto-renewal",
+-                  ]
++                  "Unlimited voice & video calls with your matches",
++                  "Everything in Plus ΓÇö unlimited hearts + passes",
++                  "Priority support",
++                  "Cancel anytime, no auto-renewal",
++                ]
+@@ -6231,5 +6134,5 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                    "Unlimited likes every day",
+-                    "Unlimited passes ΓÇö never run out of swipes",
+-                    "Cancel anytime, no auto-renewal",
+-                    "Secure checkout by Razorpay",
+-                  ]
++                  "Unlimited likes every day",
++                  "Unlimited passes ΓÇö never run out of swipes",
++                  "Cancel anytime, no auto-renewal",
++                  "Secure checkout by Razorpay",
++                ]
+@@ -6238,3 +6141,2 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                  <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+-                    isPro ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600"
+-                  }`}>
++                  <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isPro ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600"
++                    }`}>
+@@ -6242 +6144 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-                      <path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
++                      <path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+@@ -6253,5 +6155,4 @@ function SubscriptionModal({ trigger, suggestTier, profile, onClose, onUpgraded,
+-              className={`mt-5 w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl text-white font-bold text-sm disabled:opacity-50 shadow-md transition ${
+-                isPro
+-                  ? "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-amber-200/50"
+-                  : "bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 shadow-rose-200/50"
+-              }`}
++              className={`mt-5 w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl text-white font-bold text-sm disabled:opacity-50 shadow-md transition ${isPro
++                ? "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-amber-200/50"
++                : "bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 shadow-rose-200/50"
++                }`}
+@@ -6295,3 +6196,3 @@ function BillingDetailsModal({ current, profile, onClose, onSaved, showToast })
+-    name:          current?.name          || profile?.name  || "",
+-    email:         current?.email         || profile?.email || "",
+-    phone:         current?.phone         || "",
++    name: current?.name || profile?.name || "",
++    email: current?.email || profile?.email || "",
++    phone: current?.phone || "",
+@@ -6300,4 +6201,4 @@ function BillingDetailsModal({ current, profile, onClose, onSaved, showToast })
+-    city:          current?.city          || "",
+-    state:         current?.state         || "",
+-    pincode:       current?.pincode       || "",
+-    country:       current?.country       || "IN",
++    city: current?.city || "",
++    state: current?.state || "",
++    pincode: current?.pincode || "",
++    country: current?.country || "IN",
+@@ -6312 +6213 @@ function BillingDetailsModal({ current, profile, onClose, onSaved, showToast })
+-    if (!form.name.trim())          return "Full name is required";
++    if (!form.name.trim()) return "Full name is required";
+@@ -6315 +6216 @@ function BillingDetailsModal({ current, profile, onClose, onSaved, showToast })
+-    if (digits.length < 10)         return "Phone must have at least 10 digits";
++    if (digits.length < 10) return "Phone must have at least 10 digits";
+@@ -6317,2 +6218,2 @@ function BillingDetailsModal({ current, profile, onClose, onSaved, showToast })
+-    if (!form.city.trim())          return "City is required";
+-    if (!form.state.trim())         return "State is required";
++    if (!form.city.trim()) return "City is required";
++    if (!form.state.trim()) return "State is required";
+@@ -6478,3 +6379,2 @@ function PayoutDetailsModal({ current, onClose, onSaved, showToast }) {
+-              className={`flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition ${
+-                method === "upi" ? "bg-white text-rose-600 shadow-sm" : "text-gray-500"
+-              }`}
++              className={`flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition ${method === "upi" ? "bg-white text-rose-600 shadow-sm" : "text-gray-500"
++                }`}
+@@ -6486,3 +6386,2 @@ function PayoutDetailsModal({ current, onClose, onSaved, showToast }) {
+-              className={`flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition ${
+-                method === "bank" ? "bg-white text-rose-600 shadow-sm" : "text-gray-500"
+-              }`}
++              className={`flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition ${method === "bank" ? "bg-white text-rose-600 shadow-sm" : "text-gray-500"
++                }`}
+@@ -6660,2 +6559 @@ function WithdrawModal({ balance, payoutDetails, withdrawals, onChangeDetails, o
+-                    <span className={`font-semibold px-2 py-0.5 rounded-full text-[10px] uppercase ${
+-                      w.status === "paid" ? "bg-emerald-100 text-emerald-700"
++                    <span className={`font-semibold px-2 py-0.5 rounded-full text-[10px] uppercase ${w.status === "paid" ? "bg-emerald-100 text-emerald-700"
+@@ -6663,3 +6561,3 @@ function WithdrawModal({ balance, payoutDetails, withdrawals, onChangeDetails, o
+-                      : w.status === "processing" ? "bg-blue-100 text-blue-700"
+-                      : "bg-amber-100 text-amber-700"
+-                    }`}>
++                        : w.status === "processing" ? "bg-blue-100 text-blue-700"
++                          : "bg-amber-100 text-amber-700"
++                      }`}>

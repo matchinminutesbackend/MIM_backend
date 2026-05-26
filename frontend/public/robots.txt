@@ -1,0 +1,20 @@
+# MatchInMinutes — robots.txt
+# All crawlers welcome on the marketing pages, everything behind auth is blocked.
+
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /signup
+
+# Block authenticated app views from indexing — these pages return the
+# same shell to bots but the real content loads after login and isn't
+# useful in SERPs.
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+
+# Slow down overly aggressive crawlers
+Crawl-delay: 2
+
+# Sitemap location — pointed to the Vercel frontend
+Sitemap: https://matchinminutes.com/sitemap.xml

@@ -1,0 +1,744 @@
+--- Current
++++ Reference
+@@ -10,16 +10,20 @@
+ import PhoneCollageBg from "../components/PhoneCollageBg";
+ import BrandLogo from "../components/BrandLogo";
+-import MultiSelectDropdown from "../components/MultiSelectDropdown";
+ import { COUNTRIES, INDIA_STATES, INDIA_STATE_NAMES } from "../data/locations";
++import {
++  MARRIAGE_RELIGIONS, SPECIAL_CASTE_OPTIONS,
++  getCastesForState, getSubCastes, getSubReligions,
++} from "../data/marriage_data";
+ 
+ const TOTAL_STEPS = 7;
+ 
+ const RELATIONSHIP_GOALS = [
+-  { value: "long_term", label: "Long-term relationship", emoji: "💑" },
+-  { value: "short_term", label: "Short-term / Casual", emoji: "✨" },
+-  { value: "marriage", label: "Marriage", emoji: "💍" },
+-  { value: "friendship", label: "Friendship first", emoji: "🤝" },
+-  { value: "casual", label: "Just exploring", emoji: "🌟" },
+-  { value: "unsure", label: "Not sure yet", emoji: "🤔" },
++  { value: "long_term",         label: "Long-term relationship", emoji: "💑" },
++  { value: "short_term",        label: "Short-term / Casual",   emoji: "✨" },
++  { value: "marriage",          label: "Marriage",              emoji: "💍" },
++  { value: "serious_marriage",  label: "Serious Matrimony",     emoji: "🕌", badge: "New" },
++  { value: "friendship",        label: "Friendship first",      emoji: "🤝" },
++  { value: "casual",            label: "Just exploring",        emoji: "🌟" },
++  { value: "unsure",            label: "Not sure yet",          emoji: "🤔" },
+ ];
+ 
+@@ -80,45 +84,12 @@
+ 
+ const HOBBY_OPTIONS = [
+-  { value: "travel", label: "Travel", emoji: "✈️" },
+-  { value: "music", label: "Music", emoji: "🎵" },
+-  { value: "movies", label: "Movies", emoji: "🎬" },
+-  { value: "reading", label: "Reading", emoji: "📚" },
+-  { value: "gaming", label: "Gaming", emoji: "🎮" },
+-  { value: "cooking", label: "Cooking", emoji: "🍳" },
+-  { value: "fitness", label: "Fitness", emoji: "💪" },
+-  { value: "yoga", label: "Yoga", emoji: "🧘‍♀️" },
+-  { value: "photography", label: "Photography", emoji: "📸" },
+-  { value: "dancing", label: "Dancing", emoji: "💃" },
+-  { value: "hiking", label: "Hiking", emoji: "🥾" },
+-  { value: "art", label: "Art", emoji: "🖼️" },
+-  { value: "coffee", label: "Coffee", emoji: "☕" },
+-  { value: "wine", label: "Wine", emoji: "🍷" },
+-  { value: "pets", label: "Pets", emoji: "🐶" },
+-  { value: "tech", label: "Tech", emoji: "💻" },
+-  { value: "fashion", label: "Fashion", emoji: "👗" },
+-  { value: "sports", label: "Sports", emoji: "⚽" },
+-  { value: "swimming", label: "Swimming", emoji: "🏊" },
+-  { value: "cycling", label: "Cycling", emoji: "🚴" },
+-  { value: "writing", label: "Writing", emoji: "✍️" },
+-  { value: "gardening", label: "Gardening", emoji: "🌱" },
++  "Travel", "Music", "Cooking", "Reading", "Fitness", "Gaming",
++  "Photography", "Art", "Movies", "Dancing", "Hiking", "Yoga",
++  "Cycling", "Swimming", "Coffee", "Dogs", "Cats", "Volunteering",
+ ];
+ 
+ const VIBE_OPTIONS = [
+-  { value: "adventurous", label: "Adventurous", emoji: "🌍" },
+-  { value: "romantic", label: "Romantic", emoji: "💖" },
+-  { value: "ambitious", label: "Ambitious", emoji: "🚀" },
+-  { value: "chill", label: "Chill", emoji: "🌿" },
+-  { value: "creative", label: "Creative", emoji: "🎨" },
+-  { value: "funny", label: "Funny", emoji: "😂" },
+-  { value: "intellectual", label: "Intellectual", emoji: "🧠" },
+-  { value: "spontaneous", label: "Spontaneous", emoji: "⚡" },
+-  { value: "spiritual", label: "Spiritual", emoji: "🕉️" },
+-  { value: "foodie", label: "Foodie", emoji: "🍜" },
+-  { value: "nightowl", label: "Night Owl", emoji: "🌙" },
+-  { value: "earlybird", label: "Early Bird", emoji: "🌅" },
+-  { value: "introvert", label: "Introvert", emoji: "🤫" },
+-  { value: "extrovert", label: "Extrovert", emoji: "🎉" },
+-  { value: "geeky", label: "Geeky", emoji: "🤓" },
+-  { value: "mindful", label: "Mindful", emoji: "🧘" },
++  "Adventurous", "Homebody", "Spiritual", "Ambitious", "Creative",
++  "Funny", "Romantic", "Intellectual", "Outdoorsy", "Social butterfly",
+ ];
+ 
+@@ -166,29 +137,4 @@
+   { value: "jain",           label: "Jain"           },
+   { value: "other",          label: "Other"          },
+-];
+-
+-const LANGUAGE_OPTIONS = [
+-  { value: "English", label: "English" },
+-  { value: "Hindi", label: "Hindi" },
+-  { value: "Tamil", label: "Tamil" },
+-  { value: "Telugu", label: "Telugu" },
+-  { value: "Kannada", label: "Kannada" },
+-  { value: "Malayalam", label: "Malayalam" },
+-  { value: "Bengali", label: "Bengali" },
+-  { value: "Marathi", label: "Marathi" },
+-  { value: "Gujarati", label: "Gujarati" },
+-  { value: "Punjabi", label: "Punjabi" },
+-  { value: "Urdu", label: "Urdu" },
+-  { value: "Spanish", label: "Spanish" },
+-  { value: "French", label: "French" },
+-  { value: "German", label: "German" },
+-  { value: "Chinese", label: "Chinese" },
+-  { value: "Japanese", label: "Japanese" },
+-  { value: "Korean", label: "Korean" },
+-  { value: "Arabic", label: "Arabic" },
+-  { value: "Portuguese", label: "Portuguese" },
+-  { value: "Russian", label: "Russian" },
+-  { value: "Italian", label: "Italian" },
+-  { value: "Other", label: "Other" },
+ ];
+ 
+@@ -392,5 +338,5 @@
+     age: "", date_of_birth: "", gender: "", city: "", state: "", country: "India",
+     preferred_gender: "", relationship_goal: "",
+-    education_level: "", occupation: "", college_university: "", workplace: "",
++    education_level: "", occupation: "",
+     hobbies: [], vibes: [], relationship_status: "", bio: "",
+     // Lifestyle / Tinder-style detail chips
+@@ -399,20 +345,32 @@
+     religion: "", languages: [], height_cm: "",
+     first_date_idea: "",
++    // Serious-marriage-only fields
++    caste: "", sub_caste: "", sub_religion: "", annual_income: "",
+   });
+ 
+   function set(field, value) { setForm((f) => ({ ...f, [field]: value })); }
+ 
+-  // If user lands here already authenticated (e.g. Google sign-in from /login
+-  // with an incomplete profile), skip the account-creation step and prefill
+-  // what we already know so they can finish onboarding from step 2.
++  // If user lands here already authenticated (e.g. incomplete profile from a
++  // previous session), skip account-creation and prefill what we know.
++  // We do NOT advance if fromGoogle is true — the Google callback needs the
++  // user to stay on step 1 to confirm name, phone, etc.
+   useEffect(() => {
+     if (step !== 1 || !user) return;
+-    setForm((f) => ({
+-      ...f,
+-      email: f.email || user.email || "",
+-      name: f.name || profile?.name || "",
+-      password: f.password || `existing_${user.id || Math.random().toString(36).slice(2)}`,
+-    }));
+-    setStep(2);
++    // fromGoogle is set in the same event loop tick that sets user, so we
++    // use a microtask delay to let that state settle before deciding.
++    const tid = setTimeout(() => {
++      setForm((f) => ({
++        ...f,
++        email: f.email || user.email || "",
++        name: f.name || profile?.name || "",
++        password: f.password || `existing_${user.id || Math.random().toString(36).slice(2)}`,
++      }));
++      // Only auto-advance for returning logged-in users, not fresh Google sign-ins.
++      setFromGoogle((fg) => {
++        if (!fg) setStep(2);
++        return fg;
++      });
++    }, 0);
++    return () => clearTimeout(tid);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [user]);
+@@ -431,4 +389,27 @@
+             setLoading(true);
+             try {
++              // ── Decode Google JWT client-side (no verification — display only) ──
++              // This gives us the name IMMEDIATELY, before the API call, so the
++              // name field is never empty regardless of async timing.
++              let googleNameFromJwt = "";
++              try {
++                const jwtPayload = JSON.parse(atob(resp.credential.split(".")[1]));
++                googleNameFromJwt =
++                  jwtPayload.given_name ||
++                  (jwtPayload.name ? jwtPayload.name.split(" ")[0] : "") ||
++                  "";
++              } catch (_) {}
++
++              // Pre-fill name immediately from the JWT so the field is
++              // never blank regardless of async timing.
++              if (googleNameFromJwt) {
++                setForm((f) => ({ ...f, name: googleNameFromJwt }));
++              }
++
++              // ⚠️ Set fromGoogle=true BEFORE calling googleSignIn so that
++              // when setUser() fires inside it the useEffect([user]) sees the
++              // flag and does NOT auto-advance to step 2.
++              setFromGoogle(true);
++
+               const result = await googleSignIn(resp.credential);
+               // Fully-completed profiles go straight to the app.
+@@ -437,19 +418,14 @@
+                 return;
+               }
+-              // New Google users (or returning users without a complete
+-              // profile) need to finish onboarding. Stay on step 1 so they
+-              // can confirm the pre-filled name, enter a phone number
+-              // (Google's ID token doesn't include it), and review their
+-              // email (locked). Password field is hidden for Google users.
+-              setFromGoogle(true);
++              // Stay on step 1 — user must confirm name, add phone number,
++              // and optionally set a password before continuing.
+               setForm((f) => ({
+                 ...f,
+                 email: result.email || f.email,
+-                name: result.name || f.name,
++                // Server name → JWT name → already-set name (never blank)
++                name: result.name || googleNameFromJwt || f.name,
+                 phone_number: result.phone_number || f.phone_number,
+-                // Password isn't used for Google accounts but our local
+-                // validation might still read form.password — stash a random
+-                // placeholder that's >= 8 chars so it passes any length check.
+-                password: f.password || `google_${result.user_id || Math.random().toString(36).slice(2)}`,
++                // Clear any auto-generated placeholder — password is optional
++                password: "",
+               }));
+             } catch (err) {
+@@ -531,11 +507,17 @@
+   function validate() {
+     if (step === 1) {
++      // Google users skip step 1 entirely (auto-advanced to step 2)
++      // so this validation only runs for normal email/password signup.
+       if (!form.name.trim()) return "Full name is required";
+       if (!form.email.trim()) return "Email is required";
+       if (!form.phone_number.trim()) return "Phone number is required";
+-      // Google users already have an account on the backend — no password needed.
+-      if (!fromGoogle && form.password.length < 8) return "Password must be at least 8 characters";
++      if (form.password.length < 8) return "Password must be at least 8 characters";
+     }
+     if (step === 2) {
++      // Google users fill name + phone here (they skipped step 1)
++      if (fromGoogle) {
++        if (!form.name.trim()) return "Full name is required";
++        if (!form.phone_number.trim()) return "Phone number is required";
++      }
+       const age = ageFromDob(form.date_of_birth);
+       if (!form.date_of_birth) return "Date of birth is required";
+@@ -564,7 +546,19 @@
+     if (step === 1) {
+       // Google flow: account already exists (created on /auth/google).
+-      // Skip /auth/signup — it would 409 on the duplicate email. Just
+-      // advance so the user can fill out profile details.
++      // Skip /auth/signup — it would 409 on the duplicate email.
++      // If the user chose to set a password, save it now so they can
++      // also sign in with email + password in the future.
+       if (fromGoogle) {
++        if (form.password && form.password.length >= 8) {
++          setLoading(true);
++          try {
++            await api.auth.setPassword(form.password);
++          } catch (e) {
++            // Non-fatal — password save failed, but don't block onboarding
++            console.warn("Failed to save password:", e.message);
++          } finally {
++            setLoading(false);
++          }
++        }
+         setStep(2);
+         return;
+@@ -618,6 +612,4 @@
+         education_level: form.education_level || undefined,
+         occupation: form.occupation || undefined,
+-        college_university: form.college_university?.trim() || undefined,
+-        workplace: form.workplace?.trim() || undefined,
+         bio: form.bio || undefined,
+         hobbies: form.hobbies,
+@@ -635,4 +627,9 @@
+         height_cm: form.height_cm ? parseInt(form.height_cm) : undefined,
+         first_date_idea: form.first_date_idea?.trim() || undefined,
++        // Serious-marriage fields (null-safe — only sent when filled)
++        caste: form.caste?.trim() || undefined,
++        sub_caste: form.sub_caste?.trim() || undefined,
++        sub_religion: form.sub_religion?.trim() || undefined,
++        annual_income: form.annual_income || undefined,
+       };
+       await api.profile.complete(payload);
+@@ -726,6 +723,12 @@
+ 
+           <div className="mb-6">
+-            <h2 className="text-xl font-bold text-gray-900">{stepTitles[step - 1]}</h2>
+-            <p className="text-sm text-gray-400 mt-0.5">Step {step} of {TOTAL_STEPS} · {stepSubtitles[step - 1]}</p>
++            <h2 className="text-xl font-bold text-gray-900">
++              {step === 2 && fromGoogle ? "Your details" : stepTitles[step - 1]}
++            </h2>
++            <p className="text-sm text-gray-400 mt-0.5">
++              {step === 2 && fromGoogle
++                ? `Step ${step} of ${TOTAL_STEPS} · Tell us a bit about yourself`
++                : `Step ${step} of ${TOTAL_STEPS} · ${stepSubtitles[step - 1]}`}
++            </p>
+           </div>
+ 
+@@ -736,64 +739,119 @@
+           )}
+ 
+-          {/* STEP 1 — Account */}
++          {/* STEP 1 — two completely different layouts depending on sign-up method */}
+           {step === 1 && (
+-            <div className="space-y-4">
+-              {/* Email/password path: show Google button + "or" divider.
+-                  After a successful Google sign-in we already have the
+-                  email on file, so hide the button and show a confirmation
+-                  banner instead. */}
+-              {!fromGoogle ? (
+-                <>
+-                  <div ref={googleBtnRef} className="w-full flex justify-center min-h-[44px]" />
+-                  <div className="flex items-center gap-3">
+-                    <div className="flex-1 h-px bg-gray-200" />
+-                    <span className="text-[11px] text-gray-400 font-medium uppercase tracking-wide">or sign up with email</span>
+-                    <div className="flex-1 h-px bg-gray-200" />
++            fromGoogle ? (
++              /* ── Google sign-up: account linked, collect phone + optional password ── */
++              <div className="space-y-5">
++
++                {/* Google account confirmed card */}
++                <div className="flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
++                  <div className="w-11 h-11 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center flex-shrink-0">
++                    {/* Google G logo */}
++                    <svg viewBox="0 0 24 24" className="w-5 h-5">
++                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
++                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
++                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
++                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
++                    </svg>
+                   </div>
+-                </>
+-              ) : (
+-                <div className="flex items-start gap-2.5 p-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-xs">
+-                  <Check size={16} className="mt-0.5 flex-shrink-0" />
+-                  <span>
+-                    Signed in with Google as <strong>{form.email}</strong>. Confirm your details below — your email can't be changed because it's linked to your Google account.
+-                  </span>
+-                </div>
+-              )}
+-
+-              <InputField
+-                icon={<User size={16} />}
+-                label="Full name"
+-                placeholder="Your full name"
+-                value={form.name}
+-                onChange={(v) => set("name", v)}
+-                required
+-              />
+-
+-              <InputField
+-                icon={<Mail size={16} />}
+-                label="Email address"
+-                type="email"
+-                placeholder="you@example.com"
+-                value={form.email}
+-                onChange={(v) => set("email", v)}
+-                required
+-                readOnly={fromGoogle}
+-                hint={fromGoogle ? "Linked to your Google account" : undefined}
+-              />
+-
+-              <InputField
+-                icon={<Phone size={16} />}
+-                label="Phone number"
+-                type="tel"
+-                placeholder="+1 234 567 8900"
+-                value={form.phone_number}
+-                onChange={(v) => set("phone_number", v)}
+-                required
+-                hint={fromGoogle && !form.phone_number ? "Google doesn't share phone numbers — please add yours" : undefined}
+-              />
+-
+-              {/* Password is an email/password flow detail — Google users
+-                  never type or see one. */}
+-              {!fromGoogle && (
++                  <div className="flex-1 min-w-0">
++                    <p className="text-sm font-semibold text-gray-900">Google account verified</p>
++                    <p className="text-xs text-gray-500 truncate">{form.email}</p>
++                  </div>
++                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
++                    <Check size={13} className="text-green-600" />
++                  </div>
++                </div>
++
++                {/* Name — pre-filled, editable */}
++                <InputField
++                  icon={<User size={16} />}
++                  label="Your name"
++                  placeholder="Your full name"
++                  value={form.name}
++                  onChange={(v) => set("name", v)}
++                  required
++                  hint="Pre-filled from Google — feel free to edit"
++                />
++
++                {/* Phone — required (Google doesn't share it) */}
++                <InputField
++                  icon={<Phone size={16} />}
++                  label="Phone number"
++                  type="tel"
++                  placeholder="+91 98765 43210"
++                  value={form.phone_number}
++                  onChange={(v) => set("phone_number", v)}
++                  required
++                  hint="Required — Google doesn't share your phone number"
++                />
++
++                {/* Password — optional, enables email login as alternative */}
++                <div>
++                  <label className="block text-sm font-medium text-gray-700 mb-2">
++                    Password{" "}
++                    <span className="text-gray-400 font-normal text-xs">(optional)</span>
++                  </label>
++                  <div className="relative">
++                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
++                    <input
++                      type={showPwd ? "text" : "password"}
++                      value={form.password}
++                      onChange={(e) => set("password", e.target.value)}
++                      placeholder="Set a password to also sign in with email"
++                      className="w-full border border-gray-200 rounded-xl pl-10 pr-12 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition text-sm"
++                    />
++                    <button type="button" onClick={() => setShowPwd(!showPwd)}
++                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
++                      {showPwd ? <EyeOff size={16} /> : <Eye size={16} />}
++                    </button>
++                  </div>
++                  <p className="mt-1.5 text-xs text-gray-400">
++                    Skip this if you prefer to always sign in with Google
++                  </p>
++                </div>
++              </div>
++            ) : (
++              /* ── Normal email / password sign-up ── */
++              <div className="space-y-4">
++                {/* Google sign-up button */}
++                <div ref={googleBtnRef} className="w-full flex justify-center min-h-[44px]" />
++
++                <div className="flex items-center gap-3">
++                  <div className="flex-1 h-px bg-gray-200" />
++                  <span className="text-[11px] text-gray-400 font-medium uppercase tracking-wide">or sign up with email</span>
++                  <div className="flex-1 h-px bg-gray-200" />
++                </div>
++
++                <InputField
++                  icon={<User size={16} />}
++                  label="Full name"
++                  placeholder="Your full name"
++                  value={form.name}
++                  onChange={(v) => set("name", v)}
++                  required
++                />
++
++                <InputField
++                  icon={<Mail size={16} />}
++                  label="Email address"
++                  type="email"
++                  placeholder="you@example.com"
++                  value={form.email}
++                  onChange={(v) => set("email", v)}
++                  required
++                />
++
++                <InputField
++                  icon={<Phone size={16} />}
++                  label="Phone number"
++                  type="tel"
++                  placeholder="+91 98765 43210"
++                  value={form.phone_number}
++                  onChange={(v) => set("phone_number", v)}
++                  required
++                />
++
+                 <div>
+                   <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+@@ -801,5 +859,6 @@
+                     <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                     <input
+-                      type={showPwd ? "text" : "password"} value={form.password}
++                      type={showPwd ? "text" : "password"}
++                      value={form.password}
+                       onChange={(e) => set("password", e.target.value)}
+                       placeholder="Min. 8 characters"
+@@ -813,6 +872,6 @@
+                   <p className="mt-1.5 text-xs text-gray-400">Must be at least 8 characters</p>
+                 </div>
+-              )}
+-            </div>
++              </div>
++            )
+           )}
+ 
+@@ -820,4 +879,43 @@
+           {step === 2 && (
+             <div className="space-y-5">
++
++              {/* Google users land here directly — collect name + phone first */}
++              {fromGoogle && (
++                <>
++                  <div className="flex items-center gap-2.5 px-3 py-2.5 bg-blue-50 border border-blue-100 rounded-xl">
++                    <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0">
++                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
++                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
++                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
++                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
++                    </svg>
++                    <span className="text-xs text-blue-700 font-medium">Signed in with Google · {form.email}</span>
++                  </div>
++
++                  <InputField
++                    icon={<User size={16} />}
++                    label="Your name"
++                    placeholder="Your full name"
++                    value={form.name}
++                    onChange={(v) => set("name", v)}
++                    required
++                    hint="Pre-filled from Google — feel free to edit"
++                  />
++
++                  <InputField
++                    icon={<Phone size={16} />}
++                    label="Phone number"
++                    type="tel"
++                    placeholder="+91 98765 43210"
++                    value={form.phone_number}
++                    onChange={(v) => set("phone_number", v)}
++                    required
++                    hint="Google doesn't share your phone number"
++                  />
++
++                  <div className="h-px bg-gray-100" />
++                </>
++              )}
++
+               <div>
+                 <label className="block text-sm font-medium text-gray-700 mb-2">Date of birth</label>
+@@ -866,5 +964,5 @@
+             <div className="space-y-5">
+               <div>
+-                <label className="block text-sm font-medium text-gray-700 mb-2">I'm interested in dating…</label>
++                <label className="block text-sm font-medium text-gray-700 mb-2">I'm interested in…</label>
+                 <div className="grid grid-cols-2 gap-2">
+                   {GENDERS.map((g) => (
+@@ -877,8 +975,154 @@
+                 <div className="grid grid-cols-2 gap-2">
+                   {RELATIONSHIP_GOALS.map((g) => (
+-                    <SelectButton key={g.value} label={`${g.emoji} ${g.label}`} selected={form.relationship_goal === g.value} onClick={() => set("relationship_goal", g.value)} />
++                    <button
++                      key={g.value}
++                      type="button"
++                      onClick={() => { set("relationship_goal", g.value); set("caste", ""); set("sub_caste", ""); set("sub_religion", ""); }}
++                      className={`relative py-2.5 px-3 rounded-xl border text-sm text-left transition-all ${
++                        form.relationship_goal === g.value
++                          ? g.value === "serious_marriage"
++                            ? "border-purple-500 bg-purple-50 text-purple-700 font-medium"
++                            : "border-pink-500 bg-pink-50 text-pink-600 font-medium"
++                          : "border-gray-200 bg-white text-gray-600 hover:border-pink-300"
++                      }`}
++                    >
++                      {g.emoji} {g.label}
++                      {g.badge && (
++                        <span className="absolute -top-2 -right-1 bg-purple-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold leading-tight">
++                          {g.badge}
++                        </span>
++                      )}
++                    </button>
+                   ))}
+                 </div>
+               </div>
++
++              {/* Serious Marriage info banner */}
++              {form.relationship_goal === "serious_marriage" && (
++                <div className="p-3.5 bg-purple-50 border border-purple-200 rounded-xl text-sm text-purple-700 space-y-1">
++                  <p className="font-semibold">🕌 Serious Matrimony pool</p>
++                  <p className="text-xs text-purple-600 leading-relaxed">
++                    You'll only see and be seen by others who are also seriously looking for marriage. Your caste, religion, and family details help us find compatible matches.
++                  </p>
++                </div>
++              )}
++
++              {/* Marriage-specific fields — shown only for serious_marriage */}
++              {form.relationship_goal === "serious_marriage" && (
++                <div className="space-y-4 pt-1 border-t border-purple-100">
++                  <p className="text-xs text-gray-400">These details are only shared with other serious matrimony profiles.</p>
++
++                  {/* Caste */}
++                  <div>
++                    <label className="block text-sm font-medium text-gray-700 mb-2">Caste</label>
++                    <select
++                      value={form.caste}
++                      onChange={(e) => { set("caste", e.target.value); set("sub_caste", ""); }}
++                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-sm"
++                    >
++                      <option value="">Select caste…</option>
++                      {SPECIAL_CASTE_OPTIONS.map((c) => (
++                        <option key={c} value={c}>{c}</option>
++                      ))}
++                      {form.state && getCastesForState(form.state).length > 0 && (
++                        <optgroup label={`— ${form.state} communities —`}>
++                          {getCastesForState(form.state).map((c) => (
++                            <option key={c} value={c}>{c}</option>
++                          ))}
++                        </optgroup>
++                      )}
++                      {(!form.state || getCastesForState(form.state).length === 0) && (
++                        <option value="Other">Other</option>
++                      )}
++                    </select>
++                    {form.caste === "Other" && (
++                      <input
++                        type="text"
++                        placeholder="Enter your caste"
++                        onChange={(e) => set("caste", e.target.value)}
++                        className="mt-2 w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
++                      />
++                    )}
++                  </div>
++
++                  {/* Sub-caste */}
++                  {form.caste && !SPECIAL_CASTE_OPTIONS.includes(form.caste) && (
++                    <div>
++                      <label className="block text-sm font-medium text-gray-700 mb-2">Sub-caste</label>
++                      <select
++                        value={form.sub_caste}
++                        onChange={(e) => set("sub_caste", e.target.value)}
++                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-sm"
++                      >
++                        <option value="">Select…</option>
++                        <option value="No Sub-caste">No Sub-caste</option>
++                        <option value="Any Sub-caste">Any Sub-caste</option>
++                        {getSubCastes(form.caste).map((s) => (
++                          <option key={s} value={s}>{s}</option>
++                        ))}
++                        <option value="Other">Other</option>
++                      </select>
++                    </div>
++                  )}
++
++                  {/* Religion (marriage-specific dropdown with Indian focus) */}
++                  <div>
++                    <label className="block text-sm font-medium text-gray-700 mb-2">Religion</label>
++                    <select
++                      value={form.religion}
++                      onChange={(e) => { set("religion", e.target.value); set("sub_religion", ""); }}
++                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-sm"
++                    >
++                      <option value="">Select religion…</option>
++                      {MARRIAGE_RELIGIONS.map((r) => (
++                        <option key={r} value={r}>{r}</option>
++                      ))}
++                    </select>
++                  </div>
++
++                  {/* Sub-religion */}
++                  {form.religion && form.religion !== "No Religion" && form.religion !== "Any Religion" && getSubReligions(form.religion).length > 0 && (
++                    <div>
++                      <label className="block text-sm font-medium text-gray-700 mb-2">Sub-religion / Sect</label>
++                      <select
++                        value={form.sub_religion}
++                        onChange={(e) => set("sub_religion", e.target.value)}
++                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-sm"
++                      >
++                        <option value="">Select…</option>
++                        {getSubReligions(form.religion).map((s) => (
++                          <option key={s} value={s}>{s}</option>
++                        ))}
++                      </select>
++                    </div>
++                  )}
++
++                  {/* Annual Income */}
++                  <div>
++                    <label className="block text-sm font-medium text-gray-700 mb-2">
++                      💼 Annual Income <span className="text-gray-400 font-normal">(optional)</span>
++                    </label>
++                    <select
++                      value={form.annual_income}
++                      onChange={(e) => set("annual_income", e.target.value)}
++                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-sm"
++                    >
++                      <option value="">Select range…</option>
++                      <option value="prefer_not_to_say">Prefer not to say</option>
++                      <optgroup label="— Annual Income (INR) —">
++                        <option value="below_2l">Below ₹2 Lakh</option>
++                        <option value="2l_4l">₹2 – 4 Lakh</option>
++                        <option value="4l_6l">₹4 – 6 Lakh</option>
++                        <option value="6l_10l">₹6 – 10 Lakh</option>
++                        <option value="10l_15l">₹10 – 15 Lakh</option>
++                        <option value="15l_25l">₹15 – 25 Lakh</option>
++                        <option value="25l_50l">₹25 – 50 Lakh</option>
++                        <option value="50l_1cr">₹50 Lakh – 1 Crore</option>
++                        <option value="above_1cr">Above ₹1 Crore</option>
++                      </optgroup>
++                    </select>
++                  </div>
++                </div>
++              )}
+             </div>
+           )}
+@@ -896,6 +1140,4 @@
+                 </div>
+               </div>
+-              <InputField icon={<Briefcase size={16} />} label="College / University (optional)" placeholder="e.g. Stanford University" value={form.college_university} onChange={(v) => set("college_university", v)} />
+-              <InputField icon={<Briefcase size={16} />} label="Workplace (optional)" placeholder="e.g. Google, Self-employed" value={form.workplace} onChange={(v) => set("workplace", v)} />
+               <InputField icon={<Briefcase size={16} />} label="Occupation" placeholder="e.g. Software Engineer" value={form.occupation} onChange={(v) => set("occupation", v)} />
+             </div>
+@@ -946,5 +1188,5 @@
+                 <div className="flex flex-wrap gap-2">
+                   {HOBBY_OPTIONS.map((h) => (
+-                    <TagButton key={h.value} label={`${h.emoji} ${h.label}`} selected={form.hobbies.includes(h.value)} onClick={() => toggleArray("hobbies", h.value)} />
++                    <TagButton key={h} label={h} selected={form.hobbies.includes(h)} onClick={() => toggleArray("hobbies", h)} />
+                   ))}
+                 </div>
+@@ -954,5 +1196,5 @@
+                 <div className="flex flex-wrap gap-2">
+                   {VIBE_OPTIONS.map((v) => (
+-                    <TagButton key={v.value} label={`${v.emoji} ${v.label}`} selected={form.vibes.includes(v.value)} onClick={() => toggleArray("vibes", v.value)} />
++                    <TagButton key={v} label={v} selected={form.vibes.includes(v)} onClick={() => toggleArray("vibes", v)} />
+                   ))}
+                 </div>
+@@ -1075,11 +1317,24 @@
+               </div>
+ 
+-              <MultiSelectDropdown
+-                label="Languages"
+-                options={LANGUAGE_OPTIONS}
+-                selected={form.languages || []}
+-                onChange={(v) => set("languages", v)}
+-                placeholder="Select languages you speak"
+-              />
++              <div>
++                <label className="block text-sm font-medium text-gray-700 mb-2">
++                  Languages <span className="text-gray-400 font-normal">(comma-separated)</span>
++                </label>
++                <input
++                  type="text"
++                  value={(form.languages || []).join(", ")}
++                  onChange={(e) =>
++                    set(
++                      "languages",
++                      e.target.value
++                        .split(",")
++                        .map((s) => s.trim())
++                        .filter(Boolean)
++                    )
++                  }
++                  placeholder="e.g. English, Hindi, Tamil"
++                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition text-sm"
++                />
++              </div>
+ 
+               <div>

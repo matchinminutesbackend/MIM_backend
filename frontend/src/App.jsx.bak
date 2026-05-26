@@ -1,0 +1,67 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import Features from "./components/Features";
+import HowItWorks from "./components/HowItWorks";
+import Stats from "./components/Stats";
+import Testimonials from "./components/Testimonials";
+import CTABanner from "./components/CTABanner";
+import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+
+function LandingPage() {
+  return (
+    <div className="min-h-screen bg-[#0b0b18]">
+      <Navbar />
+      <HeroSection />
+      <Features />
+      <HowItWorks />
+      <Stats />
+      <Testimonials />
+      <CTABanner />
+      <Footer />
+    </div>
+  );
+}
+
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return (
+    <div className="min-h-screen bg-[#0b0b18] flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-pink-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+  return user ? children : <Navigate to="/login" replace />;
+}
+
+function GuestRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  return user ? <Navigate to="/dashboard" replace /> : children;
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+      <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+      <Route path="/onboarding" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
+      <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}

@@ -1,0 +1,21 @@
+332: const RELATIONSHIP_GOALS = [
+452: <select value={filters.relationship_goal || ""}
+453: onChange={e => update({ relationship_goal: e.target.value })}
+455: {RELATIONSHIP_GOALS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+619: {profile.relationship_goal && (
+620: <DetailChip Icon={Heart} label="Looking for" value={prettify(profile.relationship_goal)} />
+652: {profile.religion && (
+653: <DetailChip Icon={Sparkles} label="Religion" value={profile.religion} />
+704: 💬 {profile.relationship_goal === "short_term" || profile.relationship_goal === "casual"
+706: : profile.relationship_goal === "friendship"
+1123: relationship_goal: "", education_level: "",
+3245: education_level: "", relationship_goal: "", relationship_status: "",
+3250: religion: "", languages: [], height_cm: "",
+3276: relationship_goal: profile?.relationship_goal || "",
+3286: religion: profile?.religion || "",
+3319: relationship_goal: form.relationship_goal || undefined,
+3329: religion: form.religion.trim() || undefined,
+3401: ["Religion", profile.religion],
+3406: ["Looking for", prettify(profile.relationship_goal)],
+3736: <EditReligion value={form.religion} onChange={(v) => setForm(f => ({ ...f, religion: v }))} />
+3738: <EditSelect label="Looking for" value={form.relationship_goal} options={EDIT_GOALS} onChange={(v) => setForm(f => ({ ...f, relationship_goal: v }))} />
